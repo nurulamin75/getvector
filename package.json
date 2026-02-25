@@ -1,0 +1,18 @@
+{
+  "name": "svg-extractor",
+  "version": "1.0.0",
+  "description": "A Figma plugin to extract SVGs from URLs",
+  "main": "code.js",
+  "scripts": {
+    "build": "node scripts/build-ui.js && tsc -p tsconfig.json",
+    "build:ui": "node scripts/build-ui.js",
+    "watch": "tsc -p tsconfig.json --watch",
+    "dev": "node scripts/build-ui.js && tsc -p tsconfig.json --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@figma/plugin-typings": "^1.64.0",
+    "typescript": "^5.0.0"
+  }
+}

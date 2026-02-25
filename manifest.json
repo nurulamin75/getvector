@@ -1,0 +1,26 @@
+{
+  "name": "getVector",
+  "id": "1502692658976283506",
+  "api": "1.0.0",
+  "main": "dist/code.js",
+  "ui": "dist/ui.html",
+  "editorType": ["figma", "dev"],
+  "networkAccess": {
+    "allowedDomains": ["*"],
+    "reasoning": "Need to fetch SVGs from user-provided URLs"
+  },
+  "documentAccess": "dynamic-page",
+  "capabilities": [
+    "codegen",
+    "inspect"
+  ],
+  "permissions": [
+    "currentuser"
+  ],
+  "codegenLanguages": [
+    {
+      "label": "SVG",
+      "value": "svg"
+    }
+  ]
+}

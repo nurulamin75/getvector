@@ -1,0 +1,2001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>/* __STYLES__ */</style>
+</head>
+<body>
+
+  <!-- ── Sidebar ── -->
+
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="sidebar-logo" id="sidebar-logo">
+        <img class="logo-full logo-dark-hide" src="__LOGO_BASE64__" alt="getVector" height="26" />
+        <img class="logo-full logo-dark-show" src="__LOGO_LIGHT_BASE64__" alt="getVector" height="26" />
+        <img class="logo-icon" src="__ICON_BASE64__" alt="getVector" width="28" height="28" />
+      </div>
+      <button class="collapse-btn" id="collapse-btn" title="Collapse sidebar">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect width="18" height="18" x="3" y="3" rx="2"/>
+          <path d="M9 3v18"/><path d="m16 15-3-3 3-3"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="new-website-wrap" id="new-website-wrap">
+      <button class="new-website-btn" id="new-website-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+        New Website
+      </button>
+    </div>
+
+    <div class="sidebar-header">
+      <span>HISTORY</span>
+      <span id="history-badge" class="badge">0</span>
+    </div>
+
+    <div class="sidebar-search">
+      <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+      </svg>
+      <input type="text" id="history-search" placeholder="Search..." />
+    </div>
+
+    <div class="sidebar-list" id="history-list"></div>
+
+    <div id="sidebar-empty" class="sidebar-empty">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+      </svg>
+      No history yet
+    </div>
+
+    <div id="sidebar-footer" class="sidebar-footer">
+      <button class="footer-icon-btn" id="show-favorites-btn" title="Favorites">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </button>
+      <button class="footer-icon-btn" id="show-collections-btn" title="Collections">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+      </button>
+      <button class="footer-icon-btn" id="license-btn" title="License">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="5" width="22" height="14" rx="7"/><circle cx="16" cy="12" r="3"/></svg>
+      </button>
+      <div class="footer-spacer"></div>
+      <button class="footer-icon-btn footer-delete-btn" id="clear-history-btn" title="Clear history">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+      </button>
+      <button class="footer-icon-btn" id="theme-toggle-btn" title="Toggle dark mode">
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ── Main ── -->
+
+  <div class="main">
+
+    <!-- State: Initial -->
+    <div class="state-initial" id="state-initial">
+      <div class="hero-icon">
+        <img src="__ICON_BASE64__" alt="getVector" width="56" height="56" />
+      </div>
+      <p class="hero-text">Enter website URLs to import all SVG assets in Figma</p>
+      <div class="hero-card">
+        <textarea id="url-input" rows="2" placeholder="Paste one or more URLs (one per line)&#10;e.g. https://example.com"></textarea>
+        <label class="deep-crawl-toggle">
+          <input type="checkbox" id="deep-crawl-toggle" />
+          <span class="pref-checkbox"></span>
+          <span>Deep crawl linked pages</span>
+        </label>
+        <button class="hero-extract-btn" id="extract-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 10 10-12h-9l1-10z"/></svg>
+          Extract
+        </button>
+        <ul class="hero-features">
+          <li>Automatically finds all SVGs on any page</li>
+          <li>Download individually or in bulk</li>
+          <li>History saved for quick access</li>
+        </ul>
+      </div>
+      <div class="usage-bar" id="usage-bar">
+        <div class="usage-bar-info">
+          <span class="usage-bar-text" id="usage-bar-text">0 / 10 free extractions</span>
+          <button class="usage-upgrade-link" id="usage-upgrade-link">Upgrade to Pro</button>
+        </div>
+        <div class="usage-bar-track">
+          <div class="usage-bar-fill" id="usage-bar-fill" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- State: Extracting -->
+    <div class="state-extracting" id="state-extracting" style="display:none;">
+      <div class="extract-card">
+        <div class="extract-card-header">
+          <span>Extracting from</span>
+          <button class="cancel-btn" id="cancel-btn">Cancel</button>
+        </div>
+        <div class="extract-domain" id="extract-domain"></div>
+        <div class="extract-progress-bar">
+          <div class="extract-progress-fill" id="extract-progress-fill"></div>
+        </div>
+        <div class="extract-progress-info">
+          <span class="extract-progress-text" id="extract-progress-text">Connecting…</span>
+          <span class="extract-progress-pct" id="extract-progress-pct">0%</span>
+        </div>
+      </div>
+
+      <div class="extract-steps">
+        <div class="extract-step" id="step-connect">
+          <span class="step-icon" id="step-connect-icon"></span>
+          <span>Connected to server</span>
+        </div>
+        <div class="extract-step" id="step-fetch">
+          <span class="step-icon" id="step-fetch-icon"></span>
+          <span>Fetching page content</span>
+        </div>
+        <div class="extract-step" id="step-analyze">
+          <span class="step-icon" id="step-analyze-icon"></span>
+          <span>Analyzing SVG assets</span>
+        </div>
+      </div>
+
+      <div id="extract-error" class="error-msg"></div>
+    </div>
+
+    <!-- State: Results -->
+    <div class="state-results" id="state-results" style="display:none;">
+      <div class="results-header">
+        <div class="results-header-left">
+          <span class="results-domain" id="results-domain"></span>
+        </div>
+        <span class="results-count" id="results-count"></span>
+      </div>
+
+      <div class="results-toolbar">
+        <div class="search-svgs-wrap">
+          <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+          </svg>
+          <input type="text" id="search-svgs" placeholder="Search SVGs..." />
+        </div>
+
+        <div class="toolbar-dropdown-wrap" id="filter-wrap">
+          <button class="toolbar-btn" id="filter-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+            Filter
+          </button>
+          <div class="toolbar-dropdown filter-prefs-dropdown" id="filter-dropdown">
+            <div class="filter-two-col">
+              <div class="filter-col">
+                <div class="filter-col-title">Filter by</div>
+                <button class="toolbar-dropdown-item selected" data-filter="all">All SVGs</button>
+                <button class="toolbar-dropdown-item" data-filter="inline">Inline SVGs</button>
+                <button class="toolbar-dropdown-item" data-filter="external">External SVGs</button>
+                <button class="toolbar-dropdown-item" data-filter="favorites">Favorites</button>
+                <div class="filter-divider"></div>
+                <button class="toolbar-dropdown-item" data-filter="icon"><span class="cat-dot" style="background:#3B82F6"></span>Icons</button>
+                <button class="toolbar-dropdown-item" data-filter="logo"><span class="cat-dot" style="background:#8B5CF6"></span>Logos</button>
+                <button class="toolbar-dropdown-item" data-filter="illustration"><span class="cat-dot" style="background:#F59E0B"></span>Illustrations</button>
+                <button class="toolbar-dropdown-item" data-filter="decoration"><span class="cat-dot" style="background:#EC4899"></span>Decorations</button>
+              </div>
+              <div class="filter-col">
+                <div class="filter-col-title">Display</div>
+                <label class="filter-pref-item">
+                  <input type="checkbox" id="pref-file-sizes" />
+                  <span class="pref-checkbox"></span>
+                  <span>File sizes</span>
+                </label>
+                <label class="filter-pref-item">
+                  <input type="checkbox" id="pref-names" />
+                  <span class="pref-checkbox"></span>
+                  <span>SVG names</span>
+                </label>
+                <label class="filter-pref-item">
+                  <input type="checkbox" id="pref-hide-cors" />
+                  <span class="pref-checkbox"></span>
+                  <span>Hide CORS</span>
+                  <span class="pref-badge" id="cors-count-badge">0</span>
+                </label>
+                <label class="filter-pref-item">
+                  <input type="checkbox" id="pref-hide-dupes" checked />
+                  <span class="pref-checkbox"></span>
+                  <span>Hide dupes</span>
+                  <span class="pref-badge" id="dupe-count-badge">0</span>
+                </label>
+                <div class="filter-divider"></div>
+                <div class="filter-col-title">Import</div>
+                <label class="filter-pref-item">
+                  <input type="checkbox" id="pref-as-component" />
+                  <span class="pref-checkbox"></span>
+                  <span>As components</span>
+                </label>
+                <label class="filter-pref-item">
+                  <input type="checkbox" id="pref-optimize" />
+                  <span class="pref-checkbox"></span>
+                  <span>Optimize</span>
+                </label>
+                <label class="filter-pref-item filter-pref-color">
+                  <input type="checkbox" id="pref-color-enabled" />
+                  <span class="pref-checkbox"></span>
+                  <span>Color</span>
+                  <input type="color" id="pref-color-value" value="#000000" class="pref-color-input" />
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="toolbar-dropdown-wrap" id="sort-wrap">
+          <button class="toolbar-btn" id="sort-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 16-4 4-4-4"/><path d="M17 20V4"/><path d="m3 8 4-4 4 4"/><path d="M7 4v16"/></svg>
+            Sort
+          </button>
+          <div class="toolbar-dropdown" id="sort-dropdown">
+            <button class="toolbar-dropdown-item selected" data-sort="default">Default order</button>
+            <button class="toolbar-dropdown-item" data-sort="name-asc">Name (A → Z)</button>
+            <button class="toolbar-dropdown-item" data-sort="name-desc">Name (Z → A)</button>
+            <button class="toolbar-dropdown-item" data-sort="size-asc">Size (small → big)</button>
+            <button class="toolbar-dropdown-item" data-sort="size-desc">Size (big → small)</button>
+          </div>
+        </div>
+
+        <button class="toolbar-btn" id="export-btn" title="Export as ZIP">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+        </button>
+
+        <div class="toolbar-spacer"></div>
+
+        <button class="toolbar-btn select-all-btn" id="select-all-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          Select all
+        </button>
+      </div>
+
+      <div class="svg-grid-wrap">
+        <div class="svg-grid" id="svg-grid"></div>
+        <div id="empty-results" class="empty-results" style="display:none;">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+          </svg>
+          <p>No SVGs match your search</p>
+        </div>
+      </div>
+
+      <div class="batch-bar" id="batch-bar" style="display:none;">
+        <span class="batch-count" id="batch-count">0 selected</span>
+        <button class="batch-deselect" id="batch-deselect">Deselect</button>
+        <div class="batch-spacer"></div>
+        <button class="batch-add-col" id="batch-add-col">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          Collection
+        </button>
+        <button class="batch-export" id="batch-export">Export</button>
+        <button class="batch-import" id="batch-import">Import</button>
+      </div>
+    </div>
+
+    <!-- State: Favorites -->
+    <div class="state-favorites" id="state-favorites" style="display:none;">
+      <div class="panel-header">
+        <button class="panel-back-btn" id="fav-back-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <span class="panel-title">Favorites</span>
+        <span class="panel-badge" id="fav-count-badge">0</span>
+      </div>
+      <div class="fav-grid" id="fav-grid"></div>
+      <div class="panel-empty" id="fav-empty">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <p>No favorites yet</p>
+        <span class="panel-empty-hint">Star SVGs from extraction results to save them here</span>
+      </div>
+    </div>
+
+    <!-- State: Collections -->
+    <div class="state-collections" id="state-collections" style="display:none;">
+      <div class="panel-header">
+        <button class="panel-back-btn" id="col-back-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <span class="panel-title">Collections</span>
+        <span class="panel-badge" id="col-count-badge">0</span>
+        <div class="panel-header-spacer"></div>
+        <button class="panel-action-btn" id="create-collection-btn" title="New collection">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+        </button>
+      </div>
+      <div class="collections-list" id="collections-list"></div>
+      <div class="panel-empty" id="col-empty">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        <p>No collections yet</p>
+        <span class="panel-empty-hint">Create a collection to organize your SVGs</span>
+      </div>
+    </div>
+
+    <!-- State: Collection Detail -->
+    <div class="state-collection-detail" id="state-collection-detail" style="display:none;">
+      <div class="panel-header">
+        <button class="panel-back-btn" id="col-detail-back-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <span class="panel-title" id="col-detail-title"></span>
+        <span class="panel-badge" id="col-detail-count">0</span>
+        <div class="panel-header-spacer"></div>
+        <button class="panel-action-btn panel-danger-btn" id="col-detail-delete-btn" title="Delete collection">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+        </button>
+      </div>
+      <div class="fav-grid" id="col-detail-grid"></div>
+      <div class="panel-empty" id="col-detail-empty">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        <p>Collection is empty</p>
+        <span class="panel-empty-hint">Add SVGs from extraction results</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── Preview Modal ── -->
+
+  <div class="modal-overlay" id="preview-modal" style="display:none;">
+    <div class="modal" id="modal-content">
+      <div class="modal-header">
+        <span class="modal-title" id="modal-title">SVG Preview</span>
+        <div class="modal-header-actions">
+          <button class="modal-fav-btn" id="modal-fav-btn" title="Toggle favorite">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </button>
+          <button class="modal-close-btn" id="modal-close-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-preview" id="modal-preview"></div>
+        <div class="modal-details">
+          <div class="modal-meta" id="modal-meta"></div>
+          <div class="modal-code-wrap">
+            <div class="modal-code-header">
+              <span>SVG Code</span>
+              <button class="modal-copy-btn" id="modal-copy-btn">Copy</button>
+            </div>
+            <pre class="modal-code" id="modal-code"></pre>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-import-btn" id="modal-import-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+          Import to Figma
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Collection Name Dialog ── -->
+  <div class="col-name-dialog-overlay" id="col-name-dialog" style="display:none;">
+    <div class="col-name-dialog">
+      <div class="col-name-dialog-title">New Collection</div>
+      <input type="text" id="col-name-input" class="col-name-dialog-input" placeholder="Collection name" maxlength="40" />
+      <div class="col-name-dialog-actions">
+        <button class="col-name-cancel-btn" id="col-name-cancel">Cancel</button>
+        <button class="col-name-confirm-btn" id="col-name-confirm">Create</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Paywall Modal ── -->
+  <div class="paywall-overlay" id="paywall-modal" style="display:none;">
+    <div class="paywall-dialog">
+      <button class="paywall-close" id="paywall-close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+      <div class="paywall-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 10 10-12h-9l1-10z"/></svg>
+      </div>
+      <h3 class="paywall-title">Free limit reached</h3>
+      <p class="paywall-desc">You've used all 10 free extractions. Upgrade to Pro for unlimited access.</p>
+      <a class="paywall-buy-btn" id="paywall-buy-btn" href="https://7879732223047.gumroad.com/l/bhlcn" target="_blank">
+        Get Pro — $2/month
+      </a>
+      <div class="paywall-divider"><span>Already subscribed?</span></div>
+      <div class="paywall-key-row">
+        <input type="email" id="paywall-key-input" class="paywall-key-input" placeholder="Enter your subscription email" />
+        <button class="paywall-activate-btn" id="paywall-activate-btn">Activate</button>
+      </div>
+      <p class="paywall-error" id="paywall-error"></p>
+    </div>
+  </div>
+
+  <!-- ── License Settings View ── -->
+  <div class="license-overlay" id="license-modal" style="display:none;">
+    <div class="license-dialog">
+      <button class="paywall-close" id="license-close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+      <h3 class="license-title">License</h3>
+      <div class="license-status" id="license-status-view">
+        <div class="license-free" id="license-free-view">
+          <p>You're on the <strong>Free plan</strong>.</p>
+          <div class="license-key-row">
+            <input type="email" id="license-key-input" class="paywall-key-input" placeholder="Enter your subscription email" />
+            <button class="paywall-activate-btn" id="license-activate-btn">Activate</button>
+          </div>
+          <p class="paywall-error" id="license-error"></p>
+          <a class="license-buy-link" href="https://7879732223047.gumroad.com/l/bhlcn" target="_blank">Subscribe to Pro — $2/mo</a>
+        </div>
+        <div class="license-pro" id="license-pro-view" style="display:none;">
+          <div class="license-pro-badge">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2EC4A0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span>Pro license active</span>
+          </div>
+          <button class="license-deactivate-btn" id="license-deactivate-btn">Deactivate license</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ── DOM References ───────────────────────────── */
+
+    const sidebar = document.getElementById('sidebar');
+    const sidebarLogo = document.getElementById('sidebar-logo');
+    const collapseBtn = document.getElementById('collapse-btn');
+    const newWebsiteWrap = document.getElementById('new-website-wrap');
+    const newWebsiteBtn = document.getElementById('new-website-btn');
+    const historyList = document.getElementById('history-list');
+    const historyBadge = document.getElementById('history-badge');
+    const historySearch = document.getElementById('history-search');
+    const sidebarEmpty = document.getElementById('sidebar-empty');
+    const sidebarFooter = document.getElementById('sidebar-footer');
+    const clearHistoryBtn = document.getElementById('clear-history-btn');
+
+    const stateInitial = document.getElementById('state-initial');
+    const stateExtracting = document.getElementById('state-extracting');
+    const stateResults = document.getElementById('state-results');
+
+    const stateFavorites = document.getElementById('state-favorites');
+    const favGrid = document.getElementById('fav-grid');
+    const favEmpty = document.getElementById('fav-empty');
+    const favCountBadge = document.getElementById('fav-count-badge');
+    const favBackBtn = document.getElementById('fav-back-btn');
+    const showFavoritesBtn = document.getElementById('show-favorites-btn');
+
+    const stateCollections = document.getElementById('state-collections');
+    const collectionsList = document.getElementById('collections-list');
+    const colEmpty = document.getElementById('col-empty');
+    const colCountBadge = document.getElementById('col-count-badge');
+    const colBackBtn = document.getElementById('col-back-btn');
+    const showCollectionsBtn = document.getElementById('show-collections-btn');
+    const createCollectionBtn = document.getElementById('create-collection-btn');
+
+    const stateCollectionDetail = document.getElementById('state-collection-detail');
+    const colDetailTitle = document.getElementById('col-detail-title');
+    const colDetailCount = document.getElementById('col-detail-count');
+    const colDetailGrid = document.getElementById('col-detail-grid');
+    const colDetailEmpty = document.getElementById('col-detail-empty');
+    const colDetailBackBtn = document.getElementById('col-detail-back-btn');
+    const colDetailDeleteBtn = document.getElementById('col-detail-delete-btn');
+
+    const usageBar = document.getElementById('usage-bar');
+    const usageBarText = document.getElementById('usage-bar-text');
+    const usageBarFill = document.getElementById('usage-bar-fill');
+    const usageUpgradeLink = document.getElementById('usage-upgrade-link');
+    const paywallModal = document.getElementById('paywall-modal');
+    const paywallClose = document.getElementById('paywall-close');
+    const paywallBuyBtn = document.getElementById('paywall-buy-btn');
+    const paywallKeyInput = document.getElementById('paywall-key-input');
+    const paywallActivateBtn = document.getElementById('paywall-activate-btn');
+    const paywallError = document.getElementById('paywall-error');
+    const licenseModal = document.getElementById('license-modal');
+    const licenseClose = document.getElementById('license-close');
+    const licenseBtn = document.getElementById('license-btn');
+    const licenseFreeView = document.getElementById('license-free-view');
+    const licenseProView = document.getElementById('license-pro-view');
+    const licenseKeyInput = document.getElementById('license-key-input');
+    const licenseActivateBtn = document.getElementById('license-activate-btn');
+    const licenseError = document.getElementById('license-error');
+    const licenseDeactivateBtn = document.getElementById('license-deactivate-btn');
+
+    const urlInput = document.getElementById('url-input');
+    const extractBtn = document.getElementById('extract-btn');
+    const deepCrawlToggle = document.getElementById('deep-crawl-toggle');
+
+    const extractDomain = document.getElementById('extract-domain');
+    const extractProgressFill = document.getElementById('extract-progress-fill');
+    const extractProgressText = document.getElementById('extract-progress-text');
+    const extractProgressPct = document.getElementById('extract-progress-pct');
+    const cancelBtn = document.getElementById('cancel-btn');
+    const extractError = document.getElementById('extract-error');
+
+    const resultsCount = document.getElementById('results-count');
+    const resultsDomain = document.getElementById('results-domain');
+    const searchSvgs = document.getElementById('search-svgs');
+    const svgGrid = document.getElementById('svg-grid');
+    const emptyResults = document.getElementById('empty-results');
+    const selectAllBtn = document.getElementById('select-all-btn');
+    const filterBtn = document.getElementById('filter-btn');
+    const filterDropdown = document.getElementById('filter-dropdown');
+    const sortBtn = document.getElementById('sort-btn');
+    const sortDropdown = document.getElementById('sort-dropdown');
+    const exportBtn = document.getElementById('export-btn');
+
+    const batchBar = document.getElementById('batch-bar');
+    const batchCount = document.getElementById('batch-count');
+    const batchDeselect = document.getElementById('batch-deselect');
+    const batchExport = document.getElementById('batch-export');
+    const batchImport = document.getElementById('batch-import');
+    const batchAddCol = document.getElementById('batch-add-col');
+
+    const previewModal = document.getElementById('preview-modal');
+    const modalContent = document.getElementById('modal-content');
+    const modalTitle = document.getElementById('modal-title');
+    const modalPreview = document.getElementById('modal-preview');
+    const modalMeta = document.getElementById('modal-meta');
+    const modalCode = document.getElementById('modal-code');
+    const modalCopyBtn = document.getElementById('modal-copy-btn');
+    const modalImportBtn = document.getElementById('modal-import-btn');
+    const modalFavBtn = document.getElementById('modal-fav-btn');
+    const modalCloseBtn = document.getElementById('modal-close-btn');
+
+    const prefFileSizes = document.getElementById('pref-file-sizes');
+    const prefNames = document.getElementById('pref-names');
+    const prefHideCors = document.getElementById('pref-hide-cors');
+    const prefHideDupes = document.getElementById('pref-hide-dupes');
+    const prefAsComponent = document.getElementById('pref-as-component');
+    const prefOptimize = document.getElementById('pref-optimize');
+    const prefColorEnabled = document.getElementById('pref-color-enabled');
+    const prefColorValue = document.getElementById('pref-color-value');
+    const corsCountBadge = document.getElementById('cors-count-badge');
+    const dupeCountBadge = document.getElementById('dupe-count-badge');
+
+    /* ── State ────────────────────────────────────── */
+
+    const CORS_PROXIES = [
+      url => 'https://corsproxy.io/?' + encodeURIComponent(url),
+      url => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url),
+    ];
+
+    let currentHistory = [];
+    let currentFavorites = [];
+    let currentCollections = [];
+    let activeCollectionId = null;
+    let previousState = 'initial';
+    let activeUrl = null;
+    let currentSvgs = [];
+    let cancelled = false;
+    let currentFilter = 'all';
+    let currentSort = 'default';
+    let selectedSvgs = new Set();
+    let previewSvg = null;
+    let corsRestrictedCount = 0;
+    let dupeCount = 0;
+    let licenseIsPro = false;
+    let licenseUsage = { month: '', count: 0 };
+    let licenseLimit = 10;
+
+    /* ── Icons ────────────────────────────────────── */
+
+    const ICON_CHECK = '<svg width="18" height="18" viewBox="0 0 24 24" fill="#2EC4A0" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11.5 14.5 16 10"/></svg>';
+    const ICON_SPIN = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2EC4A0" stroke-width="2.5" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>';
+    const ICON_PENDING = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D1D5DB" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/></svg>';
+    const LUCIDE_GLOBE = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>';
+    const LUCIDE_X = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>';
+    const LUCIDE_PLUS = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>';
+    const LUCIDE_STAR = '<svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
+    const DOWNLOAD_ICON = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>';
+
+    /* ── State management ──────────────────────────── */
+
+    function showState(state) {
+      stateInitial.style.display = state === 'initial' ? 'flex' : 'none';
+      stateExtracting.style.display = state === 'extracting' ? 'flex' : 'none';
+      stateResults.style.display = state === 'results' ? 'flex' : 'none';
+      stateFavorites.style.display = state === 'favorites' ? 'flex' : 'none';
+      stateCollections.style.display = state === 'collections' ? 'flex' : 'none';
+      stateCollectionDetail.style.display = state === 'collection-detail' ? 'flex' : 'none';
+      newWebsiteWrap.style.display = state === 'results' ? 'block' : 'none';
+      showFavoritesBtn.classList.toggle('active', state === 'favorites');
+      showCollectionsBtn.classList.toggle('active', state === 'collections' || state === 'collection-detail');
+      if (['favorites', 'collections', 'collection-detail'].indexOf(state) === -1) {
+        previousState = state;
+      }
+    }
+
+    function resetExtractState() {
+      extractProgressFill.style.width = '0%';
+      extractProgressFill.style.background = '';
+      extractProgressPct.textContent = '0%';
+      extractProgressText.textContent = 'Connecting…';
+      extractError.style.display = 'none';
+      setStep('step-connect', 'pending');
+      setStep('step-fetch', 'pending');
+      setStep('step-analyze', 'pending');
+    }
+
+    function setStep(id, state) {
+      const el = document.getElementById(id);
+      const iconEl = document.getElementById(id + '-icon');
+      el.className = 'extract-step' + (state === 'done' ? ' done' : state === 'active' ? ' active' : '');
+      if (state === 'done') iconEl.innerHTML = ICON_CHECK;
+      else if (state === 'active') { iconEl.innerHTML = ICON_SPIN; iconEl.classList.add('spinning'); }
+      else { iconEl.innerHTML = ICON_PENDING; iconEl.classList.remove('spinning'); }
+    }
+
+    /* ── Sidebar ────────────────────────────────────── */
+
+    collapseBtn.addEventListener('click', () => sidebar.classList.add('collapsed'));
+    sidebarLogo.addEventListener('click', () => { if (sidebar.classList.contains('collapsed')) sidebar.classList.remove('collapsed'); });
+
+    const themeToggleBtn = document.getElementById('theme-toggle-btn');
+    const iconSun = themeToggleBtn.querySelector('.icon-sun');
+    const iconMoon = themeToggleBtn.querySelector('.icon-moon');
+
+    function setTheme(dark) {
+      document.body.classList.toggle('dark', dark);
+      iconSun.style.display = dark ? 'none' : 'block';
+      iconMoon.style.display = dark ? 'block' : 'none';
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      setTheme(!document.body.classList.contains('dark'));
+    });
+
+    showFavoritesBtn.addEventListener('click', () => {
+      if (stateFavorites.style.display !== 'none') {
+        showState(previousState);
+      } else {
+        showState('favorites');
+        renderFavoritesView();
+      }
+    });
+
+    showCollectionsBtn.addEventListener('click', () => {
+      if (stateCollections.style.display !== 'none') {
+        showState(previousState);
+      } else {
+        showState('collections');
+        renderCollectionsList();
+      }
+    });
+
+    favBackBtn.addEventListener('click', () => showState(previousState));
+    colBackBtn.addEventListener('click', () => showState(previousState));
+    colDetailBackBtn.addEventListener('click', () => { showState('collections'); renderCollectionsList(); });
+    colDetailDeleteBtn.addEventListener('click', () => {
+      if (activeCollectionId && confirm('Delete this collection?')) {
+        parent.postMessage({ pluginMessage: { type: 'delete-collection', id: activeCollectionId } }, '*');
+        showState('collections');
+      }
+    });
+
+    createCollectionBtn.addEventListener('click', () => promptNewCollection());
+
+    newWebsiteBtn.addEventListener('click', () => {
+      showState('initial');
+      urlInput.value = '';
+      urlInput.focus();
+    });
+
+    function timeAgo(ts) {
+      const s = Math.floor((Date.now() - ts) / 1000);
+      if (s < 60) return 'Just now';
+      if (s < 3600) return Math.floor(s / 60) + 'm ago';
+      if (s < 86400) return Math.floor(s / 3600) + 'h ago';
+      if (s < 604800) return Math.floor(s / 86400) + 'd ago';
+      return new Date(ts).toLocaleDateString();
+    }
+
+    function getDomain(url) {
+      try { return new URL(url).hostname.replace('www.', ''); } catch { return url; }
+    }
+
+    function renderHistory(filter) {
+      historyList.innerHTML = '';
+      const q = (filter || '').toLowerCase().trim();
+      const filtered = q ? currentHistory.filter(e => e.domain.includes(q) || e.url.toLowerCase().includes(q)) : currentHistory;
+      historyBadge.textContent = currentHistory.length;
+
+      if (currentHistory.length === 0) {
+        sidebarEmpty.style.display = 'flex';
+        sidebarEmpty.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>No history yet';
+        sidebarFooter.style.display = 'flex';
+        clearHistoryBtn.style.display = 'none';
+        return;
+      }
+
+      sidebarEmpty.style.display = filtered.length === 0 ? 'flex' : 'none';
+      if (filtered.length === 0) sidebarEmpty.innerHTML = '<span>No matches</span>';
+      sidebarFooter.style.display = 'flex';
+      clearHistoryBtn.style.display = 'flex';
+
+      filtered.forEach(entry => {
+        const el = document.createElement('div');
+        el.className = 'history-entry' + (entry.url === activeUrl ? ' active' : '');
+
+        const icon = document.createElement('div');
+        icon.className = 'history-icon';
+        icon.innerHTML = LUCIDE_GLOBE;
+
+        const details = document.createElement('div');
+        details.className = 'history-details';
+        const domain = document.createElement('div');
+        domain.className = 'history-domain';
+        domain.textContent = entry.domain;
+        domain.title = entry.url;
+        const meta = document.createElement('div');
+        meta.className = 'history-meta';
+        meta.textContent = entry.svgCount + ' SVGs · ' + timeAgo(entry.timestamp);
+        details.appendChild(domain);
+        details.appendChild(meta);
+
+        const del = document.createElement('button');
+        del.className = 'history-delete';
+        del.innerHTML = LUCIDE_X;
+        del.title = 'Remove';
+        del.onclick = e => { e.stopPropagation(); parent.postMessage({ pluginMessage: { type: 'delete-history', url: entry.url } }, '*'); };
+
+        el.appendChild(icon);
+        el.appendChild(details);
+        el.appendChild(del);
+        el.addEventListener('click', () => { urlInput.value = entry.url; startExtraction(); });
+        historyList.appendChild(el);
+      });
+    }
+
+    historySearch.addEventListener('input', () => renderHistory(historySearch.value));
+    clearHistoryBtn.addEventListener('click', () => parent.postMessage({ pluginMessage: { type: 'clear-history' } }, '*'));
+
+    /* ── Fetch with parallel proxy racing ─────────── */
+
+    function withTimeout(promise, ms) {
+      return new Promise((resolve, reject) => {
+        const t = setTimeout(() => reject(new Error('Timeout')), ms);
+        promise.then(v => { clearTimeout(t); resolve(v); }).catch(e => { clearTimeout(t); reject(e); });
+      });
+    }
+
+    function fetchWithProxy(url) {
+      const promises = CORS_PROXIES.map(async build => {
+        const resp = await fetch(build(url));
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+        return resp.text();
+      });
+      return new Promise((resolve, reject) => {
+        let rem = promises.length, lastErr = null;
+        promises.forEach(p => {
+          withTimeout(p, 15000).then(resolve).catch(e => { lastErr = e; if (--rem === 0) reject(new Error('All proxies failed: ' + (lastErr?.message || ''))); });
+        });
+      });
+    }
+
+    /* ── URL helpers ──────────────────────────────── */
+
+    function resolveUrl(path, base) {
+      try {
+        if (!path || path.startsWith('data:')) return path;
+        if (path.startsWith('//')) return 'https:' + path;
+        if (path.startsWith('/')) { const b = new URL(base); return b.protocol + '//' + b.host + path; }
+        if (!path.includes('://')) return new URL(path, base).href;
+        return path;
+      } catch { return path; }
+    }
+
+    function isSvgUrl(url) {
+      if (!url) return false;
+      return url.split('?')[0].split('#')[0].toLowerCase().endsWith('.svg');
+    }
+
+    function isSvgDataUri(url) { return !!url && url.trimStart().startsWith('data:image/svg+xml'); }
+
+    function decodeDataUri(uri) {
+      try {
+        const i = uri.indexOf(',');
+        if (i === -1) return null;
+        const h = uri.substring(0, i), d = uri.substring(i + 1);
+        return h.includes('base64') ? atob(d) : decodeURIComponent(d);
+      } catch { return null; }
+    }
+
+    function makeId() { return Math.random().toString(36).substring(2, 8); }
+
+    /* ── SVG optimizer ───────────────────────────── */
+
+    function optimizeSvg(content) {
+      if (!content) return content;
+      return content
+        .replace(/<!--[\s\S]*?-->/g, '')
+        .replace(/<metadata[\s\S]*?<\/metadata>/gi, '')
+        .replace(/<desc[\s\S]*?<\/desc>/gi, '')
+        .replace(/\s(data-[\w-]+)="[^"]*"/g, '')
+        .replace(/\s{2,}/g, ' ')
+        .replace(/>\s+</g, '><')
+        .trim();
+    }
+
+    /* ── Duplicate detection ─────────────────────── */
+
+    function svgHash(svg) {
+      const str = (svg.content || svg.url || '').substring(0, 500);
+      let h = 0;
+      for (let i = 0; i < str.length; i++) h = ((h << 5) - h + str.charCodeAt(i)) | 0;
+      return h;
+    }
+
+    function markDuplicates(svgs) {
+      const seen = new Map();
+      let count = 0;
+      svgs.forEach(svg => {
+        const h = svgHash(svg);
+        if (seen.has(h)) { svg._duplicate = true; count++; }
+        else { seen.set(h, true); svg._duplicate = false; }
+      });
+      dupeCount = count;
+      dupeCountBadge.textContent = count;
+    }
+
+    /* ── Auto-categorize ──────────────────────────── */
+
+    const CATEGORIES = { icon: 'Icon', logo: 'Logo', illustration: 'Illustration', decoration: 'Decoration' };
+    const CAT_COLORS = { icon: '#3B82F6', logo: '#8B5CF6', illustration: '#F59E0B', decoration: '#EC4899' };
+
+    function categorizeSvg(svg) {
+      const content = svg.content || '';
+      const w = svg.width || 0;
+      const h = svg.height || 0;
+      const size = content.length;
+
+      const pathCount = (content.match(/<path/gi) || []).length;
+      const shapeCount = (content.match(/<(rect|circle|ellipse|line|polyline|polygon)/gi) || []).length;
+      const elementCount = pathCount + shapeCount;
+      const hasText = /<text/i.test(content);
+      const hasGradient = /<(linearGradient|radialGradient)/i.test(content);
+      const title = (svg.title || svg.url || '').toLowerCase();
+
+      if (title.includes('logo') || title.includes('brand')) return 'logo';
+      if (title.includes('favicon') || title.includes('icon')) return 'icon';
+
+      if ((w > 0 && w <= 32 && h > 0 && h <= 32) || (size > 0 && size < 800 && elementCount <= 4)) return 'icon';
+      if ((w > 0 && w <= 64 && h > 0 && h <= 64) && elementCount <= 8 && !hasGradient) return 'icon';
+
+      if (hasText && elementCount <= 10) return 'logo';
+      if (hasGradient && elementCount <= 12 && size < 4000) return 'logo';
+
+      if (size > 5000 || elementCount > 15 || (w > 200 && h > 200)) return 'illustration';
+
+      if (size < 2000 && elementCount <= 6 && !hasText) return 'decoration';
+
+      return elementCount <= 6 ? 'icon' : 'illustration';
+    }
+
+    function categorizeSvgs(svgs) {
+      svgs.forEach(svg => { svg._category = categorizeSvg(svg); });
+    }
+
+    /* ── Favorites ───────────────────────────────── */
+
+    function isFavorite(svg) {
+      const key = svg.url || (svg.content || '').substring(0, 100);
+      return currentFavorites.some(f => (f.url || (f.content || '').substring(0, 100)) === key);
+    }
+
+    function toggleFavorite(svg) {
+      parent.postMessage({ pluginMessage: { type: 'toggle-favorite', svg } }, '*');
+    }
+
+    /* ── Render favorites view ─────────────────────── */
+
+    function renderFavoritesView() {
+      favGrid.innerHTML = '';
+      const favs = currentFavorites;
+      favCountBadge.textContent = favs.length;
+      favEmpty.style.display = favs.length ? 'none' : 'flex';
+
+      favs.forEach(svg => {
+        const card = document.createElement('div');
+        card.className = 'svg-card';
+        card.onclick = () => openPreview(svg);
+
+        const preview = document.createElement('div');
+        preview.className = 'svg-card-preview';
+        if (svg.content) preview.innerHTML = svg.content;
+        else if (svg.url) preview.innerHTML = '<img src="' + svg.url + '" alt="SVG" onerror="this.parentElement.innerHTML=\'<span class=svg-err>Failed</span>\'" />';
+
+        const actions = document.createElement('div');
+        actions.className = 'svg-card-actions';
+
+        const unfavBtn = document.createElement('button');
+        unfavBtn.className = 'card-fav-btn active';
+        unfavBtn.innerHTML = LUCIDE_STAR;
+        unfavBtn.title = 'Remove from favorites';
+        unfavBtn.onclick = e => { e.stopPropagation(); toggleFavorite(svg); };
+        actions.appendChild(unfavBtn);
+
+        const importBtn = document.createElement('button');
+        importBtn.className = 'import-btn';
+        importBtn.innerHTML = LUCIDE_PLUS;
+        importBtn.title = 'Import';
+        importBtn.onclick = e => { e.stopPropagation(); parent.postMessage({ pluginMessage: { type: 'import-svg', svg } }, '*'); };
+        actions.appendChild(importBtn);
+
+        preview.appendChild(actions);
+        card.appendChild(preview);
+
+        const info = document.createElement('div');
+        info.className = 'svg-card-info';
+        const nameEl = document.createElement('span');
+        nameEl.className = 'svg-card-name';
+        nameEl.textContent = svg.title || svg.url?.split('/').pop()?.split('?')[0] || 'SVG';
+        info.appendChild(nameEl);
+        card.appendChild(info);
+
+        favGrid.appendChild(card);
+      });
+    }
+
+    /* ── Collections helpers ──────────────────────── */
+
+    function renderCollectionsList() {
+      collectionsList.innerHTML = '';
+      colCountBadge.textContent = currentCollections.length;
+      colEmpty.style.display = currentCollections.length ? 'none' : 'flex';
+
+      currentCollections.forEach(col => {
+        const item = document.createElement('div');
+        item.className = 'collection-item';
+        item.onclick = () => openCollectionDetail(col.id);
+
+        const icon = document.createElement('span');
+        icon.className = 'collection-icon';
+        icon.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>';
+
+        const details = document.createElement('div');
+        details.className = 'collection-details';
+        const name = document.createElement('span');
+        name.className = 'collection-name';
+        name.textContent = col.name;
+        const count = document.createElement('span');
+        count.className = 'collection-count';
+        count.textContent = col.svgs.length + ' SVG' + (col.svgs.length !== 1 ? 's' : '');
+        details.appendChild(name);
+        details.appendChild(count);
+
+        const chevron = document.createElement('span');
+        chevron.className = 'collection-chevron';
+        chevron.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>';
+
+        item.appendChild(icon);
+        item.appendChild(details);
+        item.appendChild(chevron);
+        collectionsList.appendChild(item);
+      });
+    }
+
+    function openCollectionDetail(id) {
+      activeCollectionId = id;
+      showState('collection-detail');
+      renderCollectionDetail();
+    }
+
+    function renderCollectionDetail() {
+      const col = currentCollections.find(c => c.id === activeCollectionId);
+      if (!col) return;
+
+      colDetailTitle.textContent = col.name;
+      colDetailCount.textContent = col.svgs.length;
+      colDetailGrid.innerHTML = '';
+      colDetailEmpty.style.display = col.svgs.length ? 'none' : 'flex';
+
+      col.svgs.forEach(svg => {
+        const card = document.createElement('div');
+        card.className = 'svg-card';
+        card.onclick = () => openPreview(svg);
+
+        const preview = document.createElement('div');
+        preview.className = 'svg-card-preview';
+        if (svg.content) preview.innerHTML = svg.content;
+        else if (svg.url) preview.innerHTML = '<img src="' + svg.url + '" alt="SVG" onerror="this.parentElement.innerHTML=\'<span class=svg-err>Failed</span>\'" />';
+
+        const actions = document.createElement('div');
+        actions.className = 'svg-card-actions';
+
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'card-fav-btn active';
+        removeBtn.innerHTML = LUCIDE_X;
+        removeBtn.title = 'Remove from collection';
+        removeBtn.onclick = e => {
+          e.stopPropagation();
+          parent.postMessage({ pluginMessage: { type: 'remove-from-collection', collectionId: activeCollectionId, svg } }, '*');
+        };
+        actions.appendChild(removeBtn);
+
+        const importBtn = document.createElement('button');
+        importBtn.className = 'import-btn';
+        importBtn.innerHTML = LUCIDE_PLUS;
+        importBtn.title = 'Import';
+        importBtn.onclick = e => { e.stopPropagation(); parent.postMessage({ pluginMessage: { type: 'import-svg', svg } }, '*'); };
+        actions.appendChild(importBtn);
+
+        preview.appendChild(actions);
+        card.appendChild(preview);
+
+        const info = document.createElement('div');
+        info.className = 'svg-card-info';
+        const nameEl = document.createElement('span');
+        nameEl.className = 'svg-card-name';
+        nameEl.textContent = svg.title || svg.url?.split('/').pop()?.split('?')[0] || 'SVG';
+        info.appendChild(nameEl);
+        card.appendChild(info);
+
+        colDetailGrid.appendChild(card);
+      });
+    }
+
+    function showAddToCollectionMenu(svgs, anchorEl) {
+      let existing = document.getElementById('add-to-col-menu');
+      if (existing) existing.remove();
+
+      const menu = document.createElement('div');
+      menu.id = 'add-to-col-menu';
+      menu.className = 'add-to-col-menu';
+
+      if (currentCollections.length === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'col-menu-empty';
+        empty.textContent = 'No collections yet';
+        menu.appendChild(empty);
+      }
+
+      currentCollections.forEach(col => {
+        const item = document.createElement('button');
+        item.className = 'col-menu-item';
+        item.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> ' + col.name;
+        item.onclick = () => {
+          parent.postMessage({ pluginMessage: { type: 'add-to-collection', collectionId: col.id, svgs } }, '*');
+          menu.remove();
+        };
+        menu.appendChild(item);
+      });
+
+      const divider = document.createElement('div');
+      divider.className = 'filter-divider';
+      menu.appendChild(divider);
+
+      const newBtn = document.createElement('button');
+      newBtn.className = 'col-menu-item col-menu-new';
+      newBtn.innerHTML = LUCIDE_PLUS + ' New collection';
+      newBtn.onclick = () => {
+        menu.remove();
+        promptNewCollection(svgs);
+      };
+      menu.appendChild(newBtn);
+
+      document.body.appendChild(menu);
+      const rect = anchorEl.getBoundingClientRect();
+      menu.style.left = Math.min(rect.left, window.innerWidth - menu.offsetWidth - 8) + 'px';
+      menu.style.top = (rect.top - menu.offsetHeight - 4) + 'px';
+
+      const close = e => { if (!menu.contains(e.target) && e.target !== anchorEl) { menu.remove(); document.removeEventListener('mousedown', close); } };
+      setTimeout(() => document.addEventListener('mousedown', close), 0);
+    }
+
+    let _pendingSvgsToAdd = null;
+
+    function promptNewCollection(svgsToAdd) {
+      _pendingSvgsToAdd = svgsToAdd || null;
+      const dialog = document.getElementById('col-name-dialog');
+      const input = document.getElementById('col-name-input');
+      input.value = '';
+      dialog.style.display = 'flex';
+      setTimeout(() => input.focus(), 50);
+    }
+
+    (function setupColDialog() {
+      const dialog = document.getElementById('col-name-dialog');
+      const input = document.getElementById('col-name-input');
+      const confirmBtn = document.getElementById('col-name-confirm');
+      const cancelBtn = document.getElementById('col-name-cancel');
+
+      function submit() {
+        const name = input.value.trim();
+        if (!name) return;
+        dialog.style.display = 'none';
+        const id = makeId();
+        parent.postMessage({ pluginMessage: { type: 'create-collection', id, name } }, '*');
+        if (_pendingSvgsToAdd && _pendingSvgsToAdd.length) {
+          setTimeout(() => {
+            parent.postMessage({ pluginMessage: { type: 'add-to-collection', collectionId: id, svgs: _pendingSvgsToAdd } }, '*');
+            _pendingSvgsToAdd = null;
+          }, 200);
+        }
+      }
+
+      confirmBtn.addEventListener('click', submit);
+      input.addEventListener('keydown', e => { if (e.key === 'Enter') submit(); });
+      cancelBtn.addEventListener('click', () => { dialog.style.display = 'none'; });
+      dialog.addEventListener('click', e => { if (e.target === dialog) dialog.style.display = 'none'; });
+    })();
+
+    /* ── Export ZIP ───────────────────────────────── */
+
+    function crc32(data) {
+      const table = new Uint32Array(256);
+      for (let i = 0; i < 256; i++) { let c = i; for (let j = 0; j < 8; j++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; table[i] = c; }
+      let crc = 0xFFFFFFFF;
+      for (let i = 0; i < data.length; i++) crc = table[(crc ^ data[i]) & 0xFF] ^ (crc >>> 8);
+      return (crc ^ 0xFFFFFFFF) >>> 0;
+    }
+
+    function createZip(files) {
+      const enc = new TextEncoder();
+      const entries = files.map(f => ({ name: enc.encode(f.name), data: enc.encode(f.data) }));
+      let offset = 0;
+      const locals = [], centrals = [];
+
+      entries.forEach(e => {
+        const lh = new Uint8Array(30 + e.name.length), lv = new DataView(lh.buffer);
+        lv.setUint32(0, 0x04034b50, true);
+        lv.setUint16(4, 20, true);
+        lv.setUint16(8, 0, true);
+        lv.setUint32(14, crc32(e.data), true);
+        lv.setUint32(18, e.data.length, true);
+        lv.setUint32(22, e.data.length, true);
+        lv.setUint16(26, e.name.length, true);
+        lh.set(e.name, 30);
+
+        const ch = new Uint8Array(46 + e.name.length), cv = new DataView(ch.buffer);
+        cv.setUint32(0, 0x02014b50, true);
+        cv.setUint16(4, 20, true);
+        cv.setUint16(6, 20, true);
+        cv.setUint16(10, 0, true);
+        cv.setUint32(16, crc32(e.data), true);
+        cv.setUint32(20, e.data.length, true);
+        cv.setUint32(24, e.data.length, true);
+        cv.setUint16(28, e.name.length, true);
+        cv.setUint32(42, offset, true);
+        ch.set(e.name, 46);
+
+        locals.push({ header: lh, data: e.data });
+        centrals.push(ch);
+        offset += lh.length + e.data.length;
+      });
+
+      let cdSize = 0;
+      centrals.forEach(c => cdSize += c.length);
+      const eocd = new Uint8Array(22), ev = new DataView(eocd.buffer);
+      ev.setUint32(0, 0x06054b50, true);
+      ev.setUint16(8, entries.length, true);
+      ev.setUint16(10, entries.length, true);
+      ev.setUint32(12, cdSize, true);
+      ev.setUint32(16, offset, true);
+
+      const result = new Uint8Array(offset + cdSize + 22);
+      let pos = 0;
+      locals.forEach(l => { result.set(l.header, pos); pos += l.header.length; result.set(l.data, pos); pos += l.data.length; });
+      centrals.forEach(c => { result.set(c, pos); pos += c.length; });
+      result.set(eocd, pos);
+      return result;
+    }
+
+    async function exportZip(svgs) {
+      const files = [];
+      const usedNames = new Set();
+
+      for (const svg of svgs) {
+        let content = svg.content || '';
+        if (!svg.isInline || !content) {
+          try { content = await fetchWithProxy(svg.url); } catch { continue; }
+        }
+        if (prefOptimize.checked) content = optimizeSvg(content);
+
+        let name = (svg.title || svg.url.split('/').pop() || 'svg').replace(/[^a-zA-Z0-9._-]/g, '_');
+        if (!name.endsWith('.svg')) name += '.svg';
+        let finalName = name;
+        let counter = 1;
+        while (usedNames.has(finalName)) { finalName = name.replace('.svg', '_' + (counter++) + '.svg'); }
+        usedNames.add(finalName);
+        files.push({ name: finalName, data: content });
+      }
+
+      if (files.length === 0) return;
+      const zip = createZip(files);
+      const blob = new Blob([zip], { type: 'application/zip' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = (getDomain(activeUrl) || 'svgs') + '.zip';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    /* ── SVG extraction ──────────────────────────── */
+
+    async function extractSvgsFromHtml(html, sourceUrl) {
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      const results = [];
+      const seenUrls = new Set();
+
+      function add(info) {
+        if (prefOptimize.checked && info.isInline && info.content) info.content = optimizeSvg(info.content);
+        if (info.isInline) results.push(info);
+        else if (info.url && !seenUrls.has(info.url)) { seenUrls.add(info.url); results.push(info); }
+      }
+      function parseDim(val) { const n = parseInt(val); return isNaN(n) ? undefined : n; }
+
+      doc.querySelectorAll('svg').forEach(svg => {
+        const symbols = svg.querySelectorAll('symbol');
+        symbols.forEach(sym => {
+          const vb = sym.getAttribute('viewBox') || svg.getAttribute('viewBox') || '0 0 24 24';
+          const id = sym.getAttribute('id') || '';
+          const defs = svg.querySelector('defs');
+          add({ url: 'symbol-' + (id || makeId()), sourceUrl, isInline: true, content: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="' + vb + '">' + (defs ? defs.outerHTML : '') + sym.innerHTML + '</svg>', title: id || 'SVG Symbol' });
+        });
+        const hasVisual = svg.querySelector('path, rect, circle, ellipse, line, polyline, polygon, text, image, foreignObject');
+        if (hasVisual || symbols.length === 0) {
+          let content = svg.outerHTML;
+          if (!content.includes('xmlns=')) content = content.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
+          add({ url: 'inline-svg-' + makeId(), sourceUrl, isInline: true, content, title: (svg.querySelector('title') || {}).textContent || svg.getAttribute('aria-label') || '', width: parseDim(svg.getAttribute('width')), height: parseDim(svg.getAttribute('height')) });
+        }
+      });
+
+      const srcAttrs = ['src', 'data-src', 'data-lazy-src', 'data-original', 'data-fallback-src'];
+      doc.querySelectorAll('img').forEach(img => {
+        for (const attr of srcAttrs) {
+          const val = img.getAttribute(attr);
+          if (!val) continue;
+          if (isSvgDataUri(val)) { const d = decodeDataUri(val); if (d) add({ url: 'data-uri-' + makeId(), sourceUrl, isInline: true, content: d, title: img.getAttribute('alt') || 'Data URI SVG' }); }
+          else if (isSvgUrl(val)) add({ url: resolveUrl(val, sourceUrl), sourceUrl, isInline: false, title: img.getAttribute('alt') || img.getAttribute('title') || '', width: parseDim(img.getAttribute('width')), height: parseDim(img.getAttribute('height')) });
+        }
+        const srcset = img.getAttribute('srcset');
+        if (srcset) srcset.split(',').forEach(entry => { const url = entry.trim().split(/\s+/)[0]; if (isSvgUrl(url)) add({ url: resolveUrl(url, sourceUrl), sourceUrl, isInline: false, title: img.getAttribute('alt') || '' }); });
+      });
+
+      doc.querySelectorAll('object[data], embed[src]').forEach(el => {
+        const src = el.getAttribute('data') || el.getAttribute('src');
+        if (!src || (!isSvgUrl(src) && el.getAttribute('type') !== 'image/svg+xml')) return;
+        add({ url: resolveUrl(src, sourceUrl), sourceUrl, isInline: false, title: el.getAttribute('title') || el.getAttribute('name') || '' });
+      });
+
+      doc.querySelectorAll('picture source').forEach(source => {
+        const srcset = source.getAttribute('srcset');
+        if (!srcset) return;
+        const isSvgType = source.getAttribute('type') === 'image/svg+xml';
+        srcset.split(',').forEach(entry => { const url = entry.trim().split(/\s+/)[0]; if (isSvgUrl(url) || isSvgType) add({ url: resolveUrl(url, sourceUrl), sourceUrl, isInline: false, title: 'From <picture>' }); });
+      });
+
+      doc.querySelectorAll('link[rel*="icon"], link[rel="mask-icon"], link[rel="apple-touch-icon"]').forEach(link => {
+        const href = link.getAttribute('href');
+        if (href && isSvgUrl(href)) add({ url: resolveUrl(href, sourceUrl), sourceUrl, isInline: false, title: 'Favicon / Icon' });
+      });
+
+      doc.querySelectorAll('input[type="image"]').forEach(input => { const src = input.getAttribute('src'); if (src && isSvgUrl(src)) add({ url: resolveUrl(src, sourceUrl), sourceUrl, isInline: false, title: input.getAttribute('alt') || 'Input Image' }); });
+      doc.querySelectorAll('iframe[src]').forEach(iframe => { const src = iframe.getAttribute('src'); if (src && isSvgUrl(src)) add({ url: resolveUrl(src, sourceUrl), sourceUrl, isInline: false, title: iframe.getAttribute('title') || 'From iframe' }); });
+      doc.querySelectorAll('video[poster]').forEach(video => { const p = video.getAttribute('poster'); if (p && isSvgUrl(p)) add({ url: resolveUrl(p, sourceUrl), sourceUrl, isInline: false, title: 'Video Poster' }); });
+
+      doc.querySelectorAll('use').forEach(use => {
+        const href = use.getAttribute('href') || use.getAttributeNS('http://www.w3.org/1999/xlink', 'href') || '';
+        if (!href.includes('.svg')) return;
+        const file = href.split('#')[0];
+        if (file) add({ url: resolveUrl(file, sourceUrl), sourceUrl, isInline: false, title: 'SVG Sprite File' });
+      });
+
+      doc.querySelectorAll('[style]').forEach(el => {
+        const style = el.getAttribute('style') || '';
+        for (const m of style.matchAll(/url\(['"]?([^'")\s]+)['"]?\)/gi)) {
+          if (isSvgDataUri(m[1])) { const d = decodeDataUri(m[1]); if (d) add({ url: 'css-data-' + makeId(), sourceUrl, isInline: true, content: d, title: 'From CSS data URI' }); }
+          else if (isSvgUrl(m[1])) add({ url: resolveUrl(m[1], sourceUrl), sourceUrl, isInline: false, title: 'From inline style' });
+        }
+      });
+
+      doc.querySelectorAll('style').forEach(styleEl => {
+        const css = styleEl.textContent || '';
+        for (const m of css.matchAll(/url\(['"]?([^'")\s]+)['"]?\)/gi)) {
+          if (isSvgDataUri(m[1])) { const d = decodeDataUri(m[1]); if (d) add({ url: 'style-data-' + makeId(), sourceUrl, isInline: true, content: d, title: 'From <style> data URI' }); }
+          else if (isSvgUrl(m[1])) add({ url: resolveUrl(m[1], sourceUrl), sourceUrl, isInline: false, title: 'From <style> block' });
+        }
+      });
+
+      doc.querySelectorAll('script:not([src])').forEach(script => {
+        const text = script.textContent || '';
+        for (const m of text.matchAll(/<svg[^>]*>[\s\S]*?<\/svg>/gi)) {
+          let s = m[0].replace(/\\"/g, '"').replace(/\\'/g, "'").replace(/\\\\/g, '\\');
+          if (!s.includes('xmlns=')) s = s.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
+          add({ url: 'script-svg-' + makeId(), sourceUrl, isInline: true, content: s, title: 'From <script>' });
+        }
+      });
+
+      const cssLinks = Array.from(doc.querySelectorAll('link[rel="stylesheet"]')).slice(0, 3);
+      await Promise.allSettled(cssLinks.map(async link => {
+        const href = link.getAttribute('href');
+        if (!href) return;
+        const cssUrl = resolveUrl(href, sourceUrl);
+        try {
+          const css = await withTimeout(fetchWithProxy(cssUrl), 4000);
+          for (const m of css.matchAll(/url\(['"]?([^'")\s]+)['"]?\)/gi)) {
+            if (isSvgDataUri(m[1])) { const d = decodeDataUri(m[1]); if (d) add({ url: 'ext-css-data-' + makeId(), sourceUrl, isInline: true, content: d, title: 'From CSS: ' + href }); }
+            else if (isSvgUrl(m[1])) add({ url: resolveUrl(m[1], cssUrl), sourceUrl, isInline: false, title: 'From CSS: ' + href });
+          }
+        } catch {}
+      }));
+
+      return results;
+    }
+
+    /* ── Deep crawl ──────────────────────────────── */
+
+    function extractLinks(html, baseUrl) {
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      const links = new Set();
+      const baseDomain = getDomain(baseUrl);
+      doc.querySelectorAll('a[href]').forEach(a => {
+        try {
+          const href = resolveUrl(a.getAttribute('href'), baseUrl);
+          if (!href || href.startsWith('javascript:') || href.startsWith('#') || href.startsWith('mailto:')) return;
+          const url = new URL(href);
+          if (url.hostname.replace('www.', '') === baseDomain && !url.pathname.match(/\.(jpg|jpeg|png|gif|webp|pdf|zip|mp4|mp3)$/i)) {
+            links.add(url.origin + url.pathname);
+          }
+        } catch {}
+      });
+      return [...links].slice(0, 5);
+    }
+
+    /* ── Display SVGs ────────────────────────────── */
+
+    function estimateSvgSize(svg) { return svg.content ? svg.content.length : null; }
+
+    function formatBytes(bytes) {
+      if (bytes == null) return '~';
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / 1048576).toFixed(1) + ' MB';
+    }
+
+    function getFilteredSorted() {
+      let list = [...currentSvgs];
+
+      if (currentFilter === 'inline') list = list.filter(s => s.isInline);
+      else if (currentFilter === 'external') list = list.filter(s => !s.isInline);
+      else if (currentFilter === 'favorites') list = list.filter(s => isFavorite(s));
+      else if (['icon', 'logo', 'illustration', 'decoration'].includes(currentFilter)) list = list.filter(s => s._category === currentFilter);
+
+      if (prefHideCors.checked) list = list.filter(s => !s.corsRestricted);
+      if (prefHideDupes.checked) list = list.filter(s => !s._duplicate);
+
+      const q = (searchSvgs.value || '').toLowerCase().trim();
+      if (q) list = list.filter(s => (s.title || '').toLowerCase().includes(q) || (s.url || '').toLowerCase().includes(q));
+
+      if (currentSort === 'name-asc') list.sort((a, b) => (a.title || a.url || '').localeCompare(b.title || b.url || ''));
+      else if (currentSort === 'name-desc') list.sort((a, b) => (b.title || b.url || '').localeCompare(a.title || a.url || ''));
+      else if (currentSort === 'size-asc') list.sort((a, b) => (estimateSvgSize(a) || 0) - (estimateSvgSize(b) || 0));
+      else if (currentSort === 'size-desc') list.sort((a, b) => (estimateSvgSize(b) || 0) - (estimateSvgSize(a) || 0));
+
+      return list;
+    }
+
+    function updateBatchBar() {
+      if (selectedSvgs.size > 0) {
+        batchBar.style.display = 'flex';
+        batchCount.textContent = selectedSvgs.size + ' selected';
+      } else {
+        batchBar.style.display = 'none';
+      }
+    }
+
+    function renderSvgGrid() {
+      svgGrid.innerHTML = '';
+      const list = getFilteredSorted();
+      const showSizes = prefFileSizes.checked;
+      const showNames = prefNames.checked;
+
+      if (list.length === 0) {
+        emptyResults.style.display = 'block';
+        return;
+      }
+      emptyResults.style.display = 'none';
+
+      list.forEach((svg, idx) => {
+        const card = document.createElement('div');
+        card.className = 'svg-card' + (svg._duplicate ? ' duplicate' : '') + (selectedSvgs.has(idx) ? ' selected' : '');
+        card.draggable = true;
+
+        const selectCb = document.createElement('input');
+        selectCb.type = 'checkbox';
+        selectCb.className = 'svg-select-cb';
+        selectCb.checked = selectedSvgs.has(idx);
+        selectCb.addEventListener('change', e => {
+          e.stopPropagation();
+          if (selectCb.checked) selectedSvgs.add(idx);
+          else selectedSvgs.delete(idx);
+          card.classList.toggle('selected', selectCb.checked);
+          updateBatchBar();
+        });
+        selectCb.addEventListener('click', e => e.stopPropagation());
+        card.appendChild(selectCb);
+
+        if (svg._duplicate) {
+          const badge = document.createElement('span');
+          badge.className = 'dupe-badge';
+          badge.textContent = 'Dupe';
+          card.appendChild(badge);
+        }
+
+        const preview = document.createElement('div');
+        preview.className = 'svg-card-preview';
+
+        if (svg.isInline && svg.content) {
+          preview.innerHTML = svg.content;
+          const inner = preview.querySelector('svg');
+          if (inner) { inner.style.maxWidth = '100%'; inner.style.maxHeight = '100%'; }
+        } else {
+          const img = document.createElement('img');
+          img.src = svg.url;
+          img.alt = svg.title || 'SVG';
+          img.onerror = () => {
+            img.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ccc' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='8' y1='12' x2='16' y2='12'/%3E%3C/svg%3E";
+            img.style.opacity = '0.3';
+            svg.corsRestricted = true;
+            corsRestrictedCount = currentSvgs.filter(s => s.corsRestricted).length;
+            corsCountBadge.textContent = corsRestrictedCount;
+          };
+          preview.appendChild(img);
+        }
+
+        const cardActions = document.createElement('div');
+        cardActions.className = 'svg-card-actions';
+
+        const favBtn = document.createElement('button');
+        favBtn.className = 'card-fav-btn' + (isFavorite(svg) ? ' active' : '');
+        favBtn.innerHTML = LUCIDE_STAR;
+        favBtn.title = 'Favorite';
+        favBtn.onclick = e => { e.stopPropagation(); toggleFavorite(svg); };
+        cardActions.appendChild(favBtn);
+
+        const colBtn = document.createElement('button');
+        colBtn.className = 'card-col-btn';
+        colBtn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>';
+        colBtn.title = 'Add to collection';
+        colBtn.onclick = e => { e.stopPropagation(); showAddToCollectionMenu([svg], colBtn); };
+        cardActions.appendChild(colBtn);
+
+        const importBtn = document.createElement('button');
+        importBtn.className = 'import-btn';
+        importBtn.innerHTML = LUCIDE_PLUS;
+        importBtn.title = 'Import to Figma';
+        importBtn.onclick = e => {
+          e.stopPropagation();
+          const opts = { type: 'import-svg', svg, asComponent: prefAsComponent.checked };
+          if (prefColorEnabled.checked) opts.colorOverride = prefColorValue.value;
+          parent.postMessage({ pluginMessage: opts }, '*');
+        };
+        cardActions.appendChild(importBtn);
+
+        preview.appendChild(cardActions);
+        card.appendChild(preview);
+
+        const hasMeta = showNames || showSizes || svg._category;
+        if (hasMeta) {
+          const info = document.createElement('div');
+          info.className = 'svg-card-info';
+          if (svg._category) {
+            const catBadge = document.createElement('span');
+            catBadge.className = 'cat-badge';
+            catBadge.style.background = CAT_COLORS[svg._category] + '18';
+            catBadge.style.color = CAT_COLORS[svg._category];
+            catBadge.textContent = CATEGORIES[svg._category];
+            info.appendChild(catBadge);
+          }
+          if (showNames) {
+            const name = document.createElement('span');
+            name.className = 'svg-card-name';
+            name.textContent = svg.title || svg.url.split('/').pop() || 'Untitled';
+            info.appendChild(name);
+          }
+          if (showSizes) {
+            const size = document.createElement('span');
+            size.className = 'svg-card-size';
+            size.textContent = formatBytes(estimateSvgSize(svg));
+            info.appendChild(size);
+          }
+          card.appendChild(info);
+        }
+
+        card.addEventListener('click', () => openPreview(svg));
+
+        card.addEventListener('dragstart', e => {
+          card.classList.add('dragging');
+          e.dataTransfer.effectAllowed = 'copyMove';
+          e.dataTransfer.setData('text/plain', svg.title || svg.url || 'SVG');
+          if (svg.isInline && svg.content) e.dataTransfer.setData('text/html', svg.content);
+          const dragImg = card.querySelector('.svg-card-preview');
+          if (dragImg) e.dataTransfer.setDragImage(dragImg, dragImg.offsetWidth / 2, dragImg.offsetHeight / 2);
+          parent.postMessage({ pluginMessage: { type: 'drag-svg-start', svg } }, '*');
+        });
+
+        card.addEventListener('dragend', () => {
+          card.classList.remove('dragging');
+          parent.postMessage({ pluginMessage: { type: 'drag-svg-end' } }, '*');
+        });
+
+        svgGrid.appendChild(card);
+      });
+    }
+
+    /* ── Preview Modal ───────────────────────────── */
+
+    function openPreview(svg) {
+      previewSvg = svg;
+      modalTitle.textContent = svg.title || svg.url.split('/').pop() || 'SVG Preview';
+
+      modalPreview.innerHTML = '';
+      if (svg.isInline && svg.content) {
+        modalPreview.innerHTML = svg.content;
+        const inner = modalPreview.querySelector('svg');
+        if (inner) { inner.style.maxWidth = '100%'; inner.style.maxHeight = '100%'; }
+      } else {
+        const img = document.createElement('img');
+        img.src = svg.url;
+        img.alt = svg.title || 'SVG';
+        modalPreview.appendChild(img);
+      }
+
+      const code = svg.content || svg.url || '';
+      modalCode.textContent = code;
+
+      const size = estimateSvgSize(svg);
+      const parts = [];
+      if (svg.width && svg.height) parts.push(svg.width + ' × ' + svg.height);
+      parts.push(formatBytes(size));
+      parts.push(svg.isInline ? 'Inline' : 'External');
+      if (svg.corsRestricted) parts.push('CORS restricted');
+      modalMeta.textContent = parts.join('  ·  ');
+
+      modalFavBtn.classList.toggle('active', isFavorite(svg));
+      previewModal.style.display = 'flex';
+    }
+
+    function closePreview() {
+      previewModal.style.display = 'none';
+      previewSvg = null;
+    }
+
+    modalCloseBtn.addEventListener('click', closePreview);
+    previewModal.addEventListener('click', e => { if (e.target === previewModal) closePreview(); });
+
+    modalCopyBtn.addEventListener('click', () => {
+      if (!previewSvg) return;
+      const text = previewSvg.content || previewSvg.url || '';
+      navigator.clipboard.writeText(text).then(() => {
+        modalCopyBtn.textContent = 'Copied!';
+        setTimeout(() => { modalCopyBtn.textContent = 'Copy'; }, 1500);
+      });
+    });
+
+    modalFavBtn.addEventListener('click', () => {
+      if (previewSvg) toggleFavorite(previewSvg);
+    });
+
+    modalImportBtn.addEventListener('click', () => {
+      if (!previewSvg) return;
+      const opts = { type: 'import-svg', svg: previewSvg, asComponent: prefAsComponent.checked };
+      if (prefColorEnabled.checked) opts.colorOverride = prefColorValue.value;
+      parent.postMessage({ pluginMessage: opts }, '*');
+      closePreview();
+    });
+
+    /* ── Toolbar ──────────────────────────────────── */
+
+    searchSvgs.addEventListener('input', renderSvgGrid);
+
+    function setupDropdown(btn, dropdown, onSelect) {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const wasOpen = dropdown.classList.contains('open');
+        closeAllDropdowns();
+        if (!wasOpen) dropdown.classList.add('open');
+      });
+      dropdown.querySelectorAll('.toolbar-dropdown-item').forEach(item => {
+        item.addEventListener('click', () => {
+          dropdown.querySelectorAll('.toolbar-dropdown-item').forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          dropdown.classList.remove('open');
+          onSelect(item);
+        });
+      });
+    }
+
+    function closeAllDropdowns() {
+      document.querySelectorAll('.toolbar-dropdown').forEach(d => d.classList.remove('open'));
+    }
+
+    document.addEventListener('click', closeAllDropdowns);
+
+    filterBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      const wasOpen = filterDropdown.classList.contains('open');
+      closeAllDropdowns();
+      if (!wasOpen) filterDropdown.classList.add('open');
+    });
+
+    filterDropdown.addEventListener('click', e => e.stopPropagation());
+
+    filterDropdown.querySelectorAll('.toolbar-dropdown-item').forEach(item => {
+      item.addEventListener('click', () => {
+        filterDropdown.querySelectorAll('.toolbar-dropdown-item').forEach(i => i.classList.remove('selected'));
+        item.classList.add('selected');
+        currentFilter = item.dataset.filter;
+        renderSvgGrid();
+      });
+    });
+
+    [prefFileSizes, prefNames, prefHideCors, prefHideDupes, prefAsComponent, prefOptimize, prefColorEnabled].forEach(el => {
+      el.addEventListener('change', renderSvgGrid);
+    });
+
+    setupDropdown(sortBtn, sortDropdown, item => { currentSort = item.dataset.sort; renderSvgGrid(); });
+
+    function getImportOptions() {
+      const opts = { asComponent: prefAsComponent.checked };
+      if (prefColorEnabled.checked) opts.colorOverride = prefColorValue.value;
+      return opts;
+    }
+
+    selectAllBtn.addEventListener('click', () => {
+      const list = getFilteredSorted();
+      if (selectedSvgs.size === list.length) {
+        selectedSvgs.clear();
+      } else {
+        list.forEach((_, i) => selectedSvgs.add(i));
+      }
+      updateSelectAllBtn();
+      updateBatchBar();
+      renderSvgGrid();
+    });
+
+    function updateSelectAllBtn() {
+      const list = getFilteredSorted();
+      const allSelected = list.length > 0 && selectedSvgs.size === list.length;
+      selectAllBtn.innerHTML = allSelected
+        ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/></svg> Deselect all'
+        : '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> Select all';
+    }
+
+    exportBtn.addEventListener('click', () => exportZip(getFilteredSorted()));
+
+    /* ── Batch select ────────────────────────────── */
+
+    batchDeselect.addEventListener('click', () => {
+      selectedSvgs.clear();
+      updateSelectAllBtn();
+      updateBatchBar();
+      renderSvgGrid();
+    });
+
+    batchImport.addEventListener('click', () => {
+      const list = getFilteredSorted();
+      const selected = [...selectedSvgs].map(i => list[i]).filter(Boolean);
+      if (selected.length === 0) return;
+      batchImport.disabled = true;
+      batchImport.textContent = 'Importing…';
+      parent.postMessage({ pluginMessage: { type: 'import-selected-svgs', svgs: selected, ...getImportOptions() } }, '*');
+    });
+
+    batchExport.addEventListener('click', () => {
+      const list = getFilteredSorted();
+      const selected = [...selectedSvgs].map(i => list[i]).filter(Boolean);
+      if (selected.length > 0) exportZip(selected);
+    });
+
+    batchAddCol.addEventListener('click', () => {
+      const list = getFilteredSorted();
+      const selected = [...selectedSvgs].map(i => list[i]).filter(Boolean);
+      if (selected.length > 0) showAddToCollectionMenu(selected, batchAddCol);
+    });
+
+    /* ── Keyboard shortcuts ──────────────────────── */
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        if (previewModal.style.display !== 'none') { closePreview(); return; }
+        closeAllDropdowns();
+      }
+
+      if ((e.ctrlKey || e.metaKey) && e.key === 'a' && stateResults.style.display !== 'none') {
+        e.preventDefault();
+        const list = getFilteredSorted();
+        if (selectedSvgs.size === list.length) selectedSvgs.clear();
+        else list.forEach((_, i) => selectedSvgs.add(i));
+        updateSelectAllBtn();
+        updateBatchBar();
+        renderSvgGrid();
+      }
+    });
+
+    /* ── Extraction flow ─────────────────────────── */
+
+    function parseUrls(raw) {
+      return raw.split(/[\n,]+/).map(u => u.trim()).filter(Boolean).map(u => {
+        if (!u.startsWith('http://') && !u.startsWith('https://')) u = 'https://' + u;
+        return u;
+      });
+    }
+
+    async function extractOneUrl(url, deepCrawl) {
+      const html = await fetchWithProxy(url);
+      if (cancelled) return [];
+      let svgs = await extractSvgsFromHtml(html, url);
+      if (cancelled) return svgs;
+
+      if (deepCrawl) {
+        const links = extractLinks(html, url);
+        const existingUrls = new Set(svgs.filter(s => !s.isInline).map(s => s.url));
+        await Promise.allSettled(links.map(async link => {
+          try {
+            const pageHtml = await withTimeout(fetchWithProxy(link), 10000);
+            if (cancelled) return;
+            const pageSvgs = await extractSvgsFromHtml(pageHtml, link);
+            pageSvgs.forEach(s => {
+              if (s.isInline || !existingUrls.has(s.url)) { existingUrls.add(s.url); svgs.push(s); }
+            });
+          } catch {}
+        }));
+      }
+      return svgs;
+    }
+
+    let _usageResolve = null;
+
+    function checkUsageBeforeExtract(urls) {
+      return new Promise(resolve => {
+        if (licenseIsPro) { resolve(true); return; }
+        _usageResolve = resolve;
+        parent.postMessage({ pluginMessage: { type: 'check-usage', urls: urls } }, '*');
+      });
+    }
+
+    async function startExtraction() {
+      const urls = parseUrls(urlInput.value);
+      if (urls.length === 0) return;
+
+      const allowed = await checkUsageBeforeExtract(urls);
+      if (!allowed) return;
+
+      cancelled = false;
+      activeUrl = urls[0];
+      selectedSvgs.clear();
+      resetExtractState();
+      showState('extracting');
+
+      const isMulti = urls.length > 1;
+      extractDomain.textContent = isMulti ? urls.length + ' websites' : getDomain(urls[0]);
+
+      setStep('step-connect', 'active');
+      updateProgress(5, 'Connecting…');
+
+      try {
+        setStep('step-connect', 'done');
+        setStep('step-fetch', 'active');
+
+        let allSvgs = [];
+        const deepCrawl = deepCrawlToggle.checked;
+
+        for (let i = 0; i < urls.length; i++) {
+          if (cancelled) return;
+          const url = urls[i];
+          const label = isMulti ? ' (' + (i + 1) + '/' + urls.length + ')' : '';
+          updateProgress(15 + Math.round((i / urls.length) * 70), 'Fetching ' + getDomain(url) + label + '…');
+          extractDomain.textContent = isMulti ? getDomain(url) + label : getDomain(url);
+
+          try {
+            const svgs = await extractOneUrl(url, deepCrawl);
+            allSvgs = allSvgs.concat(svgs);
+
+            if (svgs.length > 0) {
+              parent.postMessage({
+                pluginMessage: { type: 'save-history', entry: { url, domain: getDomain(url), svgCount: svgs.length, timestamp: Date.now() } }
+              }, '*');
+            }
+          } catch (err) {
+            if (isMulti) continue;
+            throw err;
+          }
+        }
+
+        if (cancelled) return;
+
+        setStep('step-fetch', 'done');
+        setStep('step-analyze', 'active');
+        updateProgress(90, 'Analyzing SVG assets…');
+
+        categorizeSvgs(allSvgs);
+        markDuplicates(allSvgs);
+
+        setStep('step-analyze', 'done');
+        updateProgress(100, 'Complete');
+
+        currentSvgs = allSvgs;
+        currentFilter = 'all';
+        currentSort = 'default';
+        searchSvgs.value = '';
+        corsRestrictedCount = 0;
+        corsCountBadge.textContent = '0';
+
+        setTimeout(() => {
+          if (cancelled) return;
+          resultsDomain.textContent = isMulti ? urls.length + ' websites' : getDomain(urls[0]);
+          resultsCount.textContent = currentSvgs.length + ' SVG' + (currentSvgs.length === 1 ? '' : 's');
+          showState('results');
+          renderSvgGrid();
+          renderHistory(historySearch.value);
+        }, 300);
+
+      } catch (err) {
+        if (cancelled) return;
+        extractError.textContent = err.message || 'Failed to fetch URL';
+        extractError.style.display = 'block';
+        extractProgressText.textContent = 'Failed';
+        extractProgressPct.textContent = '';
+        extractProgressFill.style.width = '100%';
+        extractProgressFill.style.background = '#EF4444';
+      }
+    }
+
+    function updateProgress(pct, text) {
+      extractProgressFill.style.width = pct + '%';
+      extractProgressPct.textContent = pct + '%';
+      extractProgressText.textContent = text;
+    }
+
+    extractBtn.addEventListener('click', startExtraction);
+    urlInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && (e.ctrlKey || e.metaKey || parseUrls(urlInput.value).length <= 1)) {
+        e.preventDefault();
+        startExtraction();
+      }
+    });
+
+    cancelBtn.addEventListener('click', () => {
+      cancelled = true;
+      showState('initial');
+      urlInput.focus();
+    });
+
+    /* ── Message handling (plugin → UI) ──────────── */
+
+    window.onmessage = async event => {
+      const msg = event.data && event.data.pluginMessage;
+      if (!msg || !msg.type) return;
+
+      switch (msg.type) {
+        case 'history':
+          currentHistory = msg.entries || [];
+          renderHistory(historySearch.value);
+          break;
+
+        case 'favorites':
+          currentFavorites = msg.items || [];
+          if (stateResults.style.display !== 'none') renderSvgGrid();
+          if (stateFavorites.style.display !== 'none') renderFavoritesView();
+          if (previewSvg) modalFavBtn.classList.toggle('active', isFavorite(previewSvg));
+          break;
+
+        case 'collections':
+          currentCollections = msg.items || [];
+          if (stateCollections.style.display !== 'none') renderCollectionsList();
+          if (stateCollectionDetail.style.display !== 'none') renderCollectionDetail();
+          break;
+
+        case 'import-all-done':
+          batchImport.disabled = false;
+          batchImport.textContent = 'Import selected';
+          break;
+
+        case 'license-status':
+          licenseIsPro = msg.isPro;
+          licenseUsage = msg.usage || { month: '', count: 0 };
+          licenseLimit = msg.limit || 10;
+          updateLicenseUI();
+          break;
+
+        case 'license-result':
+          if (msg.success) {
+            paywallModal.style.display = 'none';
+            licenseModal.style.display = 'none';
+            paywallError.textContent = '';
+            licenseError.textContent = '';
+          } else {
+            const err = msg.error || 'Activation failed';
+            if (paywallModal.style.display !== 'none') paywallError.textContent = err;
+            if (licenseModal.style.display !== 'none') licenseError.textContent = err;
+          }
+          paywallActivateBtn.disabled = false;
+          paywallActivateBtn.textContent = 'Activate';
+          licenseActivateBtn.disabled = false;
+          licenseActivateBtn.textContent = 'Activate';
+          break;
+
+        case 'usage-check':
+          if (_usageResolve) {
+            _usageResolve(msg.allowed);
+            _usageResolve = null;
+          }
+          if (!msg.allowed) showPaywall();
+          break;
+      }
+    };
+
+    function updateLicenseUI() {
+      if (licenseIsPro) {
+        usageBar.style.display = 'none';
+        licenseBtn.classList.add('pro');
+        licenseFreeView.style.display = 'none';
+        licenseProView.style.display = 'block';
+      } else {
+        usageBar.style.display = 'block';
+        licenseBtn.classList.remove('pro');
+        licenseFreeView.style.display = 'block';
+        licenseProView.style.display = 'none';
+        const pct = Math.min((licenseUsage.count / licenseLimit) * 100, 100);
+        usageBarFill.style.width = pct + '%';
+        usageBarText.textContent = licenseUsage.count + ' / ' + licenseLimit + ' free extractions';
+        if (pct >= 100) usageBarFill.style.background = '#EF4444';
+        else usageBarFill.style.background = '';
+      }
+    }
+
+    function showPaywall() {
+      paywallError.textContent = '';
+      paywallKeyInput.value = '';
+      paywallModal.style.display = 'flex';
+    }
+
+    usageUpgradeLink.addEventListener('click', showPaywall);
+    paywallClose.addEventListener('click', () => { paywallModal.style.display = 'none'; });
+    paywallModal.addEventListener('click', e => { if (e.target === paywallModal) paywallModal.style.display = 'none'; });
+
+    paywallActivateBtn.addEventListener('click', () => {
+      const key = paywallKeyInput.value.trim();
+      if (!key) { paywallError.textContent = 'Please enter a license key'; return; }
+      paywallActivateBtn.disabled = true;
+      paywallActivateBtn.textContent = 'Validating…';
+      paywallError.textContent = '';
+      parent.postMessage({ pluginMessage: { type: 'activate-license', key } }, '*');
+    });
+
+    paywallKeyInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') paywallActivateBtn.click();
+    });
+
+    licenseBtn.addEventListener('click', () => {
+      licenseError.textContent = '';
+      licenseKeyInput.value = '';
+      licenseModal.style.display = 'flex';
+    });
+
+    licenseClose.addEventListener('click', () => { licenseModal.style.display = 'none'; });
+    licenseModal.addEventListener('click', e => { if (e.target === licenseModal) licenseModal.style.display = 'none'; });
+
+    licenseActivateBtn.addEventListener('click', () => {
+      const key = licenseKeyInput.value.trim();
+      if (!key) { licenseError.textContent = 'Please enter a license key'; return; }
+      licenseActivateBtn.disabled = true;
+      licenseActivateBtn.textContent = 'Validating…';
+      licenseError.textContent = '';
+      parent.postMessage({ pluginMessage: { type: 'activate-license', key } }, '*');
+    });
+
+    licenseKeyInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') licenseActivateBtn.click();
+    });
+
+    licenseDeactivateBtn.addEventListener('click', () => {
+      parent.postMessage({ pluginMessage: { type: 'deactivate-license' } }, '*');
+      licenseModal.style.display = 'none';
+    });
+
+    urlInput.focus();
+  </script>
+</body>
+</html>
