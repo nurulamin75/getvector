@@ -586,6 +586,21 @@ body.dark .sidebar-logo .logo-dark-show { display: block !important; }
 
 .col-name-dialog-input:focus { border-color: var(--accent); }
 
+.import-col-textarea {
+  resize: vertical;
+  min-height: 60px;
+  font-family: monospace;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.import-col-error {
+  color: #e74c3c;
+  font-size: 11px;
+  margin: 6px 0 0;
+  min-height: 0;
+}
+
 .col-name-dialog-actions {
   display: flex;
   gap: 8px;

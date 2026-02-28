@@ -548,6 +548,10 @@ figma.ui.onmessage = (msg) => __awaiter(this, void 0, void 0, function* () {
             yield sendLicenseStatusToUI();
             break;
         }
+        case 'notify': {
+            figma.notify(msg.msg || '');
+            break;
+        }
         case 'drag-svg-start': {
             currentDragSvg = msg.svg;
             break;

@@ -511,6 +511,11 @@ figma.ui.onmessage = async (msg: any) => {
       break;
     }
 
+    case 'notify': {
+      figma.notify(msg.msg || '');
+      break;    
+    }
+
     case 'drag-svg-start': {
       currentDragSvg = msg.svg as SVGInfo;
       break;

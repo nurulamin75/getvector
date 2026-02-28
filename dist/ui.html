@@ -589,6 +589,21 @@ body.dark .sidebar-logo .logo-dark-show { display: block !important; }
 
 .col-name-dialog-input:focus { border-color: var(--accent); }
 
+.import-col-textarea {
+  resize: vertical;
+  min-height: 60px;
+  font-family: monospace;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.import-col-error {
+  color: #e74c3c;
+  font-size: 11px;
+  margin: 6px 0 0;
+  min-height: 0;
+}
+
 .col-name-dialog-actions {
   display: flex;
   gap: 8px;
@@ -2071,6 +2086,9 @@ body.dark .dupe-badge { background: #422006; color: #FBBF24; }
         <span class="panel-title">Collections</span>
         <span class="panel-badge" id="col-count-badge">0</span>
         <div class="panel-header-spacer"></div>
+        <button class="panel-action-btn" id="import-collection-btn" title="Import shared collection">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </button>
         <button class="panel-action-btn" id="create-collection-btn" title="New collection">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
         </button>
@@ -2092,6 +2110,9 @@ body.dark .dupe-badge { background: #422006; color: #FBBF24; }
         <span class="panel-title" id="col-detail-title"></span>
         <span class="panel-badge" id="col-detail-count">0</span>
         <div class="panel-header-spacer"></div>
+        <button class="panel-action-btn" id="col-detail-share-btn" title="Share collection">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        </button>
         <button class="panel-action-btn panel-danger-btn" id="col-detail-delete-btn" title="Delete collection">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
         </button>
@@ -2151,6 +2172,19 @@ body.dark .dupe-badge { background: #422006; color: #FBBF24; }
       <div class="col-name-dialog-actions">
         <button class="col-name-cancel-btn" id="col-name-cancel">Cancel</button>
         <button class="col-name-confirm-btn" id="col-name-confirm">Create</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Import Collection Dialog ── -->
+  <div class="col-name-dialog-overlay" id="import-col-dialog" style="display:none;">
+    <div class="col-name-dialog">
+      <div class="col-name-dialog-title">Import Collection</div>
+      <textarea id="import-col-input" class="col-name-dialog-input import-col-textarea" placeholder="Paste the shared collection code here" rows="4"></textarea>
+      <p class="import-col-error" id="import-col-error"></p>
+      <div class="col-name-dialog-actions">
+        <button class="col-name-cancel-btn" id="import-col-cancel">Cancel</button>
+        <button class="col-name-confirm-btn" id="import-col-confirm">Import</button>
       </div>
     </div>
   </div>
@@ -2247,6 +2281,8 @@ body.dark .dupe-badge { background: #422006; color: #FBBF24; }
     const colDetailEmpty = document.getElementById('col-detail-empty');
     const colDetailBackBtn = document.getElementById('col-detail-back-btn');
     const colDetailDeleteBtn = document.getElementById('col-detail-delete-btn');
+    const colDetailShareBtn = document.getElementById('col-detail-share-btn');
+    const importCollectionBtn = document.getElementById('import-collection-btn');
 
     const usageBar = document.getElementById('usage-bar');
     const usageBarText = document.getElementById('usage-bar-text');
@@ -2439,6 +2475,8 @@ body.dark .dupe-badge { background: #422006; color: #FBBF24; }
         showState('collections');
       }
     });
+    colDetailShareBtn.addEventListener('click', () => shareCollection(activeCollectionId));
+    importCollectionBtn.addEventListener('click', () => showImportCollectionDialog());
 
     createCollectionBtn.addEventListener('click', () => promptNewCollection());
 
@@ -2885,6 +2923,72 @@ body.dark .dupe-badge { background: #422006; color: #FBBF24; }
       input.addEventListener('keydown', e => { if (e.key === 'Enter') submit(); });
       cancelBtn.addEventListener('click', () => { dialog.style.display = 'none'; });
       dialog.addEventListener('click', e => { if (e.target === dialog) dialog.style.display = 'none'; });
+    })();
+
+    /* ── Share / Import Collections ────────────────── */
+
+    function shareCollection(colId) {
+      const col = currentCollections.find(c => c.id === colId);
+      if (!col || !col.svgs.length) { parent.postMessage({ pluginMessage: { type: 'notify', msg: 'Collection is empty' } }, '*'); return; }
+      var payload = JSON.stringify({ n: col.name, s: col.svgs.map(function(s) { return { u: s.url || '', c: s.content || '', t: s.title || '' }; }) });
+      var code = 'gv1:' + btoa(unescape(encodeURIComponent(payload)));
+      var ta = document.createElement('textarea');
+      ta.value = code;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      parent.postMessage({ pluginMessage: { type: 'notify', msg: 'Collection code copied to clipboard!' } }, '*');
+    }
+
+    function showImportCollectionDialog() {
+      var dialog = document.getElementById('import-col-dialog');
+      var input = document.getElementById('import-col-input');
+      var errorEl = document.getElementById('import-col-error');
+      input.value = '';
+      errorEl.textContent = '';
+      dialog.style.display = 'flex';
+      setTimeout(function() { input.focus(); }, 50);
+    }
+
+    (function setupImportColDialog() {
+      var dialog = document.getElementById('import-col-dialog');
+      var input = document.getElementById('import-col-input');
+      var errorEl = document.getElementById('import-col-error');
+      var confirmBtn = document.getElementById('import-col-confirm');
+      var cancelBtn = document.getElementById('import-col-cancel');
+
+      function submit() {
+        var code = input.value.trim();
+        errorEl.textContent = '';
+        if (!code) { errorEl.textContent = 'Please paste a collection code'; return; }
+        if (code.indexOf('gv1:') !== 0) { errorEl.textContent = 'Invalid collection code'; return; }
+        try {
+          var json = decodeURIComponent(escape(atob(code.substring(4))));
+          var data = JSON.parse(json);
+          if (!data.n || !Array.isArray(data.s)) throw new Error('bad');
+          var svgs = data.s.map(function(s) { return { url: s.u || '', content: s.c || '', title: s.t || '', isInline: !!s.c }; });
+          var id = makeId();
+          parent.postMessage({ pluginMessage: { type: 'create-collection', id: id, name: data.n } }, '*');
+          if (svgs.length) {
+            setTimeout(function() {
+              parent.postMessage({ pluginMessage: { type: 'add-to-collection', collectionId: id, svgs: svgs } }, '*');
+            }, 200);
+          }
+          dialog.style.display = 'none';
+          parent.postMessage({ pluginMessage: { type: 'notify', msg: 'Collection "' + data.n + '" imported with ' + svgs.length + ' SVGs!' } }, '*');
+          setTimeout(function() { renderCollectionsList(); }, 300);
+        } catch (e) {
+          errorEl.textContent = 'Invalid or corrupted collection code';
+        }
+      }
+
+      confirmBtn.addEventListener('click', submit);
+      input.addEventListener('keydown', function(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submit(); } });
+      cancelBtn.addEventListener('click', function() { dialog.style.display = 'none'; });
+      dialog.addEventListener('click', function(e) { if (e.target === dialog) dialog.style.display = 'none'; });
     })();
 
     /* ── Export ZIP ───────────────────────────────── */
