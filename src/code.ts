@@ -51,9 +51,7 @@ const CORS_PROXIES = [
   (url: string) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
 ];
 
-let currentDragSvg: SVGInfo | null = null;
-
-figma.showUI(__html__, { width: 820, height: 600, themeColors: true });
+figma.showUI(__html__, { width: 920, height: 680, themeColors: true });
 
 async function loadHistory(): Promise<HistoryEntry[]> {
   try {
@@ -297,11 +295,9 @@ figma.ui.onmessage = async (msg: any) => {
           asComponent: msg.asComponent,
           colorOverride: msg.colorOverride,
         });
-        if (!currentDragSvg) {
-          figma.currentPage.selection = [node];
-          figma.viewport.scrollAndZoomIntoView([node]);
-          figma.notify('SVG imported!');
-        }
+        figma.currentPage.selection = [node];
+        figma.viewport.scrollAndZoomIntoView([node]);
+        figma.notify('SVG imported!');
       } catch (err) {
         figma.notify(`Import failed: ${(err as Error).message}`, { error: true });
       }
@@ -516,33 +512,19 @@ figma.ui.onmessage = async (msg: any) => {
       break;    
     }
 
-    case 'drag-svg-start': {
-      currentDragSvg = msg.svg as SVGInfo;
-      break;
-    }
-
-    case 'drag-svg-end': {
-      currentDragSvg = null;
+    case 'drop-svg': {
+      const svg = msg.svg as SVGInfo;
+      importSvgToFigma(svg).then(node => {
+        const vp = figma.viewport.center;
+        node.x = vp.x - node.width / 2;
+        node.y = vp.y - node.height / 2;
+        figma.currentPage.selection = [node];
+        figma.viewport.scrollAndZoomIntoView([node]);
+        figma.notify('SVG added to canvas!');
+      }).catch(() => {
+        figma.notify('Failed to drop SVG', { error: true });
+      });
       break;
     }
   }
 };
-
-(figma as any).on('drop', async (event: any) => {
-  if (!currentDragSvg) return;
-  const svg = currentDragSvg;
-  currentDragSvg = null;
-
-  try {
-    const node = await importSvgToFigma(svg);
-    node.x = event.absoluteX - node.width / 2;
-    node.y = event.absoluteY - node.height / 2;
-    figma.currentPage.selection = [node];
-    figma.viewport.scrollAndZoomIntoView([node]);
-    figma.notify('SVG added to canvas!');
-  } catch {
-    figma.notify('Failed to drop SVG', { error: true });
-  }
-
-  return false;
-});

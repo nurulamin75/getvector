@@ -24,8 +24,7 @@ const CORS_PROXIES = [
     (url) => `https://corsproxy.io/?${encodeURIComponent(url)}`,
     (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
 ];
-let currentDragSvg = null;
-figma.showUI(__html__, { width: 820, height: 600, themeColors: true });
+figma.showUI(__html__, { width: 920, height: 680, themeColors: true });
 function loadHistory() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -314,11 +313,9 @@ figma.ui.onmessage = (msg) => __awaiter(this, void 0, void 0, function* () {
                     asComponent: msg.asComponent,
                     colorOverride: msg.colorOverride,
                 });
-                if (!currentDragSvg) {
-                    figma.currentPage.selection = [node];
-                    figma.viewport.scrollAndZoomIntoView([node]);
-                    figma.notify('SVG imported!');
-                }
+                figma.currentPage.selection = [node];
+                figma.viewport.scrollAndZoomIntoView([node]);
+                figma.notify('SVG imported!');
             }
             catch (err) {
                 figma.notify(`Import failed: ${err.message}`, { error: true });
@@ -552,32 +549,20 @@ figma.ui.onmessage = (msg) => __awaiter(this, void 0, void 0, function* () {
             figma.notify(msg.msg || '');
             break;
         }
-        case 'drag-svg-start': {
-            currentDragSvg = msg.svg;
-            break;
-        }
-        case 'drag-svg-end': {
-            currentDragSvg = null;
+        case 'drop-svg': {
+            const svg = msg.svg;
+            importSvgToFigma(svg).then(node => {
+                const vp = figma.viewport.center;
+                node.x = vp.x - node.width / 2;
+                node.y = vp.y - node.height / 2;
+                figma.currentPage.selection = [node];
+                figma.viewport.scrollAndZoomIntoView([node]);
+                figma.notify('SVG added to canvas!');
+            }).catch(() => {
+                figma.notify('Failed to drop SVG', { error: true });
+            });
             break;
         }
     }
 });
-figma.on('drop', (event) => __awaiter(this, void 0, void 0, function* () {
-    if (!currentDragSvg)
-        return;
-    const svg = currentDragSvg;
-    currentDragSvg = null;
-    try {
-        const node = yield importSvgToFigma(svg);
-        node.x = event.absoluteX - node.width / 2;
-        node.y = event.absoluteY - node.height / 2;
-        figma.currentPage.selection = [node];
-        figma.viewport.scrollAndZoomIntoView([node]);
-        figma.notify('SVG added to canvas!');
-    }
-    catch (_a) {
-        figma.notify('Failed to drop SVG', { error: true });
-    }
-    return false;
-}));
 //# sourceMappingURL=code.js.map

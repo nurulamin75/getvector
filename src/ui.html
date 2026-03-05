@@ -22,32 +22,66 @@
       </button>
     </div>
 
-    <div class="new-website-wrap" id="new-website-wrap">
-      <button class="new-website-btn" id="new-website-btn">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-        New Website
-      </button>
+    <!-- Tab Bar -->
+    <div class="tab-bar" id="tab-bar">
+      <div class="tab-group">
+        <button class="tab-btn active" id="tab-extract">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 10 10-12h-9l1-10z"/></svg>
+          Extract
+        </button>
+        <button class="tab-btn" id="tab-library">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+          Library
+        </button>
+      </div>
     </div>
 
-    <div class="sidebar-header">
-      <span>HISTORY</span>
-      <span id="history-badge" class="badge">0</span>
+    <!-- Sidebar: Extract Panel (History) -->
+    <div class="sidebar-panel" id="sidebar-extract-panel">
+      <div class="new-website-wrap" id="new-website-wrap">
+        <button class="new-website-btn" id="new-website-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+          New Website
+        </button>
+      </div>
+
+      <div class="sidebar-header">
+        <span>HISTORY</span>
+        <span id="history-badge" class="badge">0</span>
+      </div>
+
+      <div class="sidebar-search">
+        <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="text" id="history-search" placeholder="Search..." />
+      </div>
+
+      <div class="sidebar-list" id="history-list"></div>
+
+      <div id="sidebar-empty" class="sidebar-empty">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+        </svg>
+        No history yet
+      </div>
     </div>
 
-    <div class="sidebar-search">
-      <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
-      </svg>
-      <input type="text" id="history-search" placeholder="Search..." />
-    </div>
+    <!-- Sidebar: Library Panel -->
+    <div class="sidebar-panel" id="sidebar-library-panel" style="display:none;">
+      <div class="sidebar-header">
+        <span>LIBRARIES</span>
+        <span id="library-sidebar-badge" class="badge">39</span>
+      </div>
 
-    <div class="sidebar-list" id="history-list"></div>
+      <div class="sidebar-search">
+        <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="text" id="library-sidebar-search" placeholder="Search libraries..." />
+      </div>
 
-    <div id="sidebar-empty" class="sidebar-empty">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-      </svg>
-      No history yet
+      <div class="sidebar-list" id="sidebar-library-list"></div>
     </div>
 
     <div id="sidebar-footer" class="sidebar-footer">
@@ -341,6 +375,134 @@
       </div>
     </div>
 
+    <!-- State: Icon Library (empty/welcome) -->
+    <div class="state-icon-library" id="state-icon-library" style="display:none;">
+      <button class="panel-back-btn" id="library-back-btn" style="display:none;"></button>
+      <div class="library-grid" id="library-grid" style="display:none;"></div>
+      <div class="library-welcome">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+        <h3>Icon Library</h3>
+        <p>Select a library from the sidebar to browse thousands of open source icons</p>
+      </div>
+    </div>
+
+    <!-- State: Library Detail (icons) -->
+    <div class="state-library-detail" id="state-library-detail" style="display:none;">
+      <div class="panel-header">
+        <button class="panel-back-btn" id="library-detail-back-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <span class="panel-title" id="library-detail-title"></span>
+        <span class="panel-badge" id="library-detail-count">0</span>
+      </div>
+
+      <div class="results-toolbar lib-toolbar">
+        <div class="search-svgs-wrap">
+          <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+          </svg>
+          <input type="text" id="library-search" class="library-search-input" placeholder="Search icons..." />
+        </div>
+
+        <div class="toolbar-dropdown-wrap" id="lib-sort-wrap">
+          <button class="toolbar-btn" id="lib-sort-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 16-4 4-4-4"/><path d="M17 20V4"/><path d="m3 8 4-4 4 4"/><path d="M7 4v16"/></svg>
+            Sort
+          </button>
+          <div class="toolbar-dropdown" id="lib-sort-dropdown">
+            <button class="toolbar-dropdown-item selected" data-libsort="name-asc">Name (A → Z)</button>
+            <button class="toolbar-dropdown-item" data-libsort="name-desc">Name (Z → A)</button>
+          </div>
+        </div>
+
+        <div class="toolbar-spacer"></div>
+
+        <button class="toolbar-btn select-all-btn" id="lib-select-all-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          Select all
+        </button>
+      </div>
+
+      <div class="lib-content-wrap">
+        <div class="lib-grid-area">
+          <div class="library-icon-grid" id="library-icon-grid"></div>
+          <div class="library-loading" id="library-loading" style="display:none;">
+            <div class="library-spinner"></div>
+            <span>Loading icons...</span>
+          </div>
+          <button class="library-load-more" id="library-load-more" style="display:none;">Load more</button>
+          <div class="panel-empty" id="library-empty" style="display:none;">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <p>No icons found</p>
+          </div>
+        </div>
+
+        <!-- Right Detail Panel -->
+        <div class="lib-detail-panel" id="lib-detail-panel" style="display:none;">
+          <div class="lib-detail-close" id="lib-detail-close">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          </div>
+          <div class="lib-detail-preview" id="lib-detail-preview"></div>
+          <div class="lib-detail-name" id="lib-detail-name"></div>
+          <div class="lib-detail-lib" id="lib-detail-lib"></div>
+
+          <div class="lib-detail-section">
+            <div class="lib-detail-section-title">Customize</div>
+            <div class="lib-detail-row">
+              <label>Color</label>
+              <input type="color" id="lib-detail-color" value="#000000" class="lib-detail-color-input" />
+            </div>
+            <div class="lib-detail-row">
+              <label>Size</label>
+              <div class="lib-detail-size-group">
+                <button class="lib-size-btn" data-size="16">16</button>
+                <button class="lib-size-btn" data-size="24">24</button>
+                <button class="lib-size-btn active" data-size="32">32</button>
+                <button class="lib-size-btn" data-size="48">48</button>
+                <button class="lib-size-btn" data-size="64">64</button>
+                <input type="number" class="lib-size-custom" id="lib-detail-size" value="32" min="8" max="512" />
+              </div>
+            </div>
+          </div>
+
+          <div class="lib-detail-section">
+            <div class="lib-detail-section-title">Import to Figma</div>
+            <button class="lib-detail-action-btn lib-detail-primary" id="lib-detail-import-frame">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+              Import as Frame
+            </button>
+            <button class="lib-detail-action-btn lib-detail-primary" id="lib-detail-import-component">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15.5 2-8.5 8.5v5h5l8.5-8.5a2.12 2.12 0 0 0 0-3l-2-2a2.12 2.12 0 0 0-3 0z"/></svg>
+              Import as Component
+            </button>
+          </div>
+
+          <div class="lib-detail-section">
+            <div class="lib-detail-section-title">Actions</div>
+            <button class="lib-detail-action-btn" id="lib-detail-copy-svg">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy SVG Code
+            </button>
+            <button class="lib-detail-action-btn" id="lib-detail-download">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+              Download SVG
+            </button>
+            <button class="lib-detail-action-btn" id="lib-detail-fav">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              Add to Favorites
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="batch-bar" id="lib-batch-bar" style="display:none;">
+        <span class="batch-count" id="lib-batch-count">0 selected</span>
+        <button class="batch-deselect" id="lib-batch-deselect">Deselect</button>
+        <div class="batch-spacer"></div>
+        <button class="batch-import" id="lib-batch-import">Import All</button>
+      </div>
+    </div>
+
   </div>
 
   <!-- ── Preview Modal ── -->
@@ -500,6 +662,47 @@
     const colDetailShareBtn = document.getElementById('col-detail-share-btn');
     const importCollectionBtn = document.getElementById('import-collection-btn');
 
+    const tabExtract = document.getElementById('tab-extract');
+    const tabLibrary = document.getElementById('tab-library');
+    const sidebarExtractPanel = document.getElementById('sidebar-extract-panel');
+    const sidebarLibraryPanel = document.getElementById('sidebar-library-panel');
+    const sidebarLibraryList = document.getElementById('sidebar-library-list');
+    const librarySidebarSearch = document.getElementById('library-sidebar-search');
+    const librarySidebarBadge = document.getElementById('library-sidebar-badge');
+
+    const stateIconLibrary = document.getElementById('state-icon-library');
+    const libraryGrid = document.getElementById('library-grid');
+    const libraryBackBtn = document.getElementById('library-back-btn');
+    const stateLibraryDetail = document.getElementById('state-library-detail');
+    const libraryDetailTitle = document.getElementById('library-detail-title');
+    const libraryDetailCount = document.getElementById('library-detail-count');
+    const libraryDetailBackBtn = document.getElementById('library-detail-back-btn');
+    const librarySearch = document.getElementById('library-search');
+    const libraryIconGrid = document.getElementById('library-icon-grid');
+    const libraryLoading = document.getElementById('library-loading');
+    const libraryLoadMore = document.getElementById('library-load-more');
+    const libraryEmpty = document.getElementById('library-empty');
+
+    const libSortBtn = document.getElementById('lib-sort-btn');
+    const libSortDropdown = document.getElementById('lib-sort-dropdown');
+    const libSelectAllBtn = document.getElementById('lib-select-all-btn');
+    const libDetailPanel = document.getElementById('lib-detail-panel');
+    const libDetailClose = document.getElementById('lib-detail-close');
+    const libDetailPreview = document.getElementById('lib-detail-preview');
+    const libDetailName = document.getElementById('lib-detail-name');
+    const libDetailLib = document.getElementById('lib-detail-lib');
+    const libDetailColor = document.getElementById('lib-detail-color');
+    const libDetailSize = document.getElementById('lib-detail-size');
+    const libDetailImportFrame = document.getElementById('lib-detail-import-frame');
+    const libDetailImportComponent = document.getElementById('lib-detail-import-component');
+    const libDetailCopySvg = document.getElementById('lib-detail-copy-svg');
+    const libDetailDownload = document.getElementById('lib-detail-download');
+    const libDetailFav = document.getElementById('lib-detail-fav');
+    const libBatchBar = document.getElementById('lib-batch-bar');
+    const libBatchCount = document.getElementById('lib-batch-count');
+    const libBatchDeselect = document.getElementById('lib-batch-deselect');
+    const libBatchImport = document.getElementById('lib-batch-import');
+
     const usageBar = document.getElementById('usage-bar');
     const usageBarText = document.getElementById('usage-bar-text');
     const usageBarFill = document.getElementById('usage-bar-fill');
@@ -617,10 +820,12 @@
       stateFavorites.style.display = state === 'favorites' ? 'flex' : 'none';
       stateCollections.style.display = state === 'collections' ? 'flex' : 'none';
       stateCollectionDetail.style.display = state === 'collection-detail' ? 'flex' : 'none';
+      stateIconLibrary.style.display = state === 'icon-library' ? 'flex' : 'none';
+      stateLibraryDetail.style.display = state === 'library-detail' ? 'flex' : 'none';
       newWebsiteWrap.style.display = state === 'results' ? 'block' : 'none';
       showFavoritesBtn.classList.toggle('active', state === 'favorites');
       showCollectionsBtn.classList.toggle('active', state === 'collections' || state === 'collection-detail');
-      if (['favorites', 'collections', 'collection-detail'].indexOf(state) === -1) {
+      if (['favorites', 'collections', 'collection-detail', 'icon-library', 'library-detail'].indexOf(state) === -1) {
         previousState = state;
       }
     }
@@ -681,6 +886,28 @@
         renderCollectionsList();
       }
     });
+
+    var activeTab = 'extract';
+
+    function switchTab(tab) {
+      activeTab = tab;
+      tabExtract.classList.toggle('active', tab === 'extract');
+      tabLibrary.classList.toggle('active', tab === 'library');
+      sidebarExtractPanel.style.display = tab === 'extract' ? '' : 'none';
+      sidebarLibraryPanel.style.display = tab === 'library' ? '' : 'none';
+      if (tab === 'extract') {
+        showState(previousState || 'initial');
+      } else {
+        renderSidebarLibraries();
+        showState('icon-library');
+      }
+    }
+
+    tabExtract.addEventListener('click', () => switchTab('extract'));
+    tabLibrary.addEventListener('click', () => switchTab('library'));
+
+    libraryBackBtn.addEventListener('click', () => showState('icon-library'));
+    libraryDetailBackBtn.addEventListener('click', () => { showState('icon-library'); });
 
     favBackBtn.addEventListener('click', () => showState(previousState));
     colBackBtn.addEventListener('click', () => showState(previousState));
@@ -1207,6 +1434,502 @@
       dialog.addEventListener('click', function(e) { if (e.target === dialog) dialog.style.display = 'none'; });
     })();
 
+    /* ── Icon Library ─────────────────────────────── */
+
+    var ICON_LIBS = [
+      { id: 'lucide', name: 'Lucide', pkg: 'lucide-static', dir: '/icons/', desc: 'Beautiful & consistent icons' },
+      { id: 'heroicons-outline', name: 'Heroicons Outline', pkg: 'heroicons', dir: '/24/outline/', desc: 'By the makers of Tailwind CSS' },
+      { id: 'heroicons-solid', name: 'Heroicons Solid', pkg: 'heroicons', dir: '/24/solid/', desc: 'Solid style Heroicons' },
+      { id: 'feather', name: 'Feather Icons', pkg: 'feather-icons', dir: '/dist/icons/', desc: 'Simply beautiful open source icons' },
+      { id: 'tabler', name: 'Tabler Icons', pkg: '@tabler/icons', dir: '/categories/outline/', desc: '5000+ free MIT icons', deep: true },
+      { id: 'bootstrap', name: 'Bootstrap Icons', pkg: 'bootstrap-icons', dir: '/icons/', desc: 'Official Bootstrap icon library' },
+      { id: 'iconoir', name: 'Iconoir', pkg: 'iconoir', dir: '/icons/regular/', desc: 'Open source SVG icon library' },
+      { id: 'simple', name: 'Simple Icons', pkg: 'simple-icons', dir: '/icons/', desc: 'SVG icons for popular brands' },
+      { id: 'phosphor', name: 'Phosphor Icons', pkg: '@phosphor-icons/core', dir: '/assets/regular/', desc: 'Flexible icon family' },
+      { id: 'remix', name: 'Remix Icon', pkg: 'remixicon', dir: '/icons/', desc: 'Open source icon system', deep: true },
+      { id: 'boxicons', name: 'Boxicons', pkg: 'boxicons', dir: '/svg/regular/', desc: 'High quality web icons' },
+      { id: 'boxicons-solid', name: 'Boxicons Solid', pkg: 'boxicons', dir: '/svg/solid/', desc: 'Solid Boxicons variants' },
+      { id: 'boxicons-logos', name: 'Boxicons Logos', pkg: 'boxicons', dir: '/svg/logos/', desc: 'Brand logos by Boxicons' },
+      { id: 'ionicons', name: 'Ionicons', pkg: 'ionicons', dir: '/dist/collection/components/icon/svg/', desc: 'Premium icons by Ionic' },
+      { id: 'octicons', name: 'Octicons', pkg: '@primer/octicons', dir: '/build/svg/', desc: 'GitHub\'s icon set' },
+      { id: 'cssgg', name: 'css.gg', pkg: 'css.gg', dir: '/icons/svg/', desc: '700+ pure CSS & SVG icons' },
+      { id: 'eva-outline', name: 'Eva Icons Outline', pkg: 'eva-icons', dir: '/outline/svg/', desc: 'Beautifully crafted open source icons' },
+      { id: 'eva-fill', name: 'Eva Icons Fill', pkg: 'eva-icons', dir: '/fill/svg/', desc: 'Filled Eva icon variants' },
+      { id: 'teenyicons', name: 'Teenyicons', pkg: 'teenyicons', dir: '/outline/', desc: 'Tiny minimal 1px icons' },
+      { id: 'teenyicons-solid', name: 'Teenyicons Solid', pkg: 'teenyicons', dir: '/solid/', desc: 'Solid Teenyicon variants' },
+      { id: 'jam', name: 'Jam Icons', pkg: 'jam-icons', dir: '/svg/', desc: '890+ handcrafted SVG icons' },
+      { id: 'majesticons', name: 'Majesticons', pkg: 'majesticons', dir: '/line/', desc: 'Beautiful line icons' },
+      { id: 'majesticons-solid', name: 'Majesticons Solid', pkg: 'majesticons', dir: '/solid/', desc: 'Solid Majesticon variants' },
+      { id: 'pixelart', name: 'Pixelarticons', pkg: 'pixelarticons', dir: '/svg/', desc: 'Pixel-perfect retro icons' },
+      { id: 'mono', name: 'Mono Icons', pkg: 'mono-icons', dir: '/svg/', desc: 'Simple & minimal mono icons' },
+      { id: 'flowbite', name: 'Flowbite Icons', pkg: 'flowbite-icons', dir: '/src/outline/', desc: 'Tailwind compatible icons', deep: true },
+      { id: 'bytesize', name: 'Bytesize Icons', pkg: 'bytesize-icons', dir: '/dist/icons/', desc: 'Tiny style-controlled SVG icons' },
+      { id: 'iconoir-solid', name: 'Iconoir Solid', pkg: 'iconoir', dir: '/icons/solid/', desc: 'Solid Iconoir variants' },
+      { id: 'primeicons', name: 'PrimeIcons', pkg: 'primeicons', dir: '/raw-svg/', desc: 'Icons for PrimeFaces & PrimeVue' },
+      { id: 'crypto-black', name: 'Crypto Icons', pkg: 'cryptocurrency-icons', dir: '/svg/black/', desc: 'Cryptocurrency brand icons' },
+      { id: 'crypto-color', name: 'Crypto Icons Color', pkg: 'cryptocurrency-icons', dir: '/svg/color/', desc: 'Color cryptocurrency icons' },
+      { id: 'flag-icons', name: 'Flag Icons', pkg: 'flag-icons', dir: '/flags/4x3/', desc: 'Country flag SVGs' },
+      { id: 'circle-flags', name: 'Circle Flags', pkg: 'circle-flags', dir: '/flags/', desc: 'Circular country flag icons' },
+      { id: 'devicon', name: 'Devicon', pkg: 'devicon', dir: '/icons/', desc: 'Developer tool & language icons', deep: true },
+      { id: 'evil', name: 'Evil Icons', pkg: 'evil-icons', dir: '/assets/icons/', desc: 'Clean & minimal SVG icons' },
+      { id: 'open-iconic', name: 'Open Iconic', pkg: 'open-iconic', dir: '/svg/', desc: 'Hyper-legible open icon set' },
+      { id: 'zondicons', name: 'Zondicons', pkg: 'zondicons', dir: '/', desc: 'Premium SVG icon set by Steve' },
+      { id: 'entypo', name: 'Entypo', pkg: 'entypo', dir: '/src/Entypo/', desc: '400+ carefully crafted icons' },
+      { id: 'entypo-social', name: 'Entypo Social', pkg: 'entypo', dir: '/src/Entypo Social Extension/', desc: 'Social media icons by Entypo' },
+    ];
+
+    var libVersionCache = {};
+
+    var libCache = {};
+    var activeLib = null;
+    var libSearchTerm = '';
+    var libPage = 0;
+    var libSortOrder = 'name-asc';
+    var selectedLibIcons = new Set();
+    var activeLibIcon = null;
+    var LIB_PAGE_SIZE = 80;
+
+    var libSidebarFilter = '';
+
+    function renderSidebarLibraries() {
+      sidebarLibraryList.innerHTML = '';
+      var q = libSidebarFilter.toLowerCase();
+      var filtered = ICON_LIBS.filter(function(lib) {
+        return !q || lib.name.toLowerCase().indexOf(q) !== -1;
+      });
+      librarySidebarBadge.textContent = ICON_LIBS.length;
+
+      filtered.forEach(function(lib) {
+        var item = document.createElement('div');
+        item.className = 'sidebar-lib-item';
+        if (activeLib && activeLib.id === lib.id) item.classList.add('active');
+        item.onclick = function() { openLibrary(lib); };
+
+        var icon = document.createElement('span');
+        icon.className = 'sidebar-lib-icon';
+        icon.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>';
+
+        var name = document.createElement('span');
+        name.className = 'sidebar-lib-name';
+        name.textContent = lib.name;
+
+        var cached = libCache[lib.id];
+        if (cached) {
+          var badge = document.createElement('span');
+          badge.className = 'sidebar-lib-badge';
+          badge.textContent = cached.length;
+          item.appendChild(icon);
+          item.appendChild(name);
+          item.appendChild(badge);
+        } else {
+          item.appendChild(icon);
+          item.appendChild(name);
+        }
+
+        sidebarLibraryList.appendChild(item);
+      });
+    }
+
+    librarySidebarSearch.addEventListener('input', function() {
+      libSidebarFilter = librarySidebarSearch.value.trim();
+      renderSidebarLibraries();
+    });
+
+    async function openLibrary(lib) {
+      activeLib = lib;
+      libSearchTerm = '';
+      libPage = 0;
+      libSortOrder = 'name-asc';
+      selectedLibIcons.clear();
+      activeLibIcon = null;
+      librarySearch.value = '';
+      libDetailPanel.style.display = 'none';
+      libBatchBar.style.display = 'none';
+      showState('library-detail');
+      renderSidebarLibraries();
+      libraryDetailTitle.textContent = lib.name;
+      libraryDetailCount.textContent = '';
+      libraryIconGrid.innerHTML = '';
+      libraryEmpty.style.display = 'none';
+      libraryLoadMore.style.display = 'none';
+
+      if (libCache[lib.id]) {
+        libraryDetailCount.textContent = libCache[lib.id].length;
+        renderLibraryIcons();
+        return;
+      }
+
+      libraryLoading.style.display = 'flex';
+      try {
+        var icons = await fetchLibraryIcons(lib);
+        libCache[lib.id] = icons;
+        libraryDetailCount.textContent = icons.length;
+        renderLibraryIcons();
+        renderSidebarLibraries();
+      } catch (e) {
+        libraryEmpty.style.display = 'flex';
+        libraryEmpty.querySelector('p').textContent = 'Failed to load icons';
+      }
+      libraryLoading.style.display = 'none';
+    }
+
+    async function resolveLibVersion(pkg) {
+      if (libVersionCache[pkg]) return libVersionCache[pkg];
+      var url = 'https://data.jsdelivr.com/v1/packages/npm/' + encodeURIComponent(pkg);
+      var resp = await fetch(url);
+      if (!resp.ok) throw new Error('Failed to resolve version');
+      var data = await resp.json();
+      var versions = data.versions || [];
+      if (!versions.length) throw new Error('No versions found');
+      var ver = versions[0].version;
+      libVersionCache[pkg] = ver;
+      return ver;
+    }
+
+    async function fetchLibraryIcons(lib) {
+      var version = await resolveLibVersion(lib.pkg);
+      var url = 'https://data.jsdelivr.com/v1/packages/npm/' + encodeURIComponent(lib.pkg) + '@' + version + '?structure=flat';
+      var resp = await fetch(url);
+      if (!resp.ok) throw new Error('Failed');
+      var data = await resp.json();
+      var files = data.files || [];
+      var svgs = [];
+      var dir = lib.dir;
+      for (var i = 0; i < files.length; i++) {
+        var f = files[i];
+        var name = f.name || '';
+        if (name.indexOf(dir) === 0 && name.length > 4 && name.substring(name.length - 4) === '.svg') {
+          var rest = name.substring(dir.length);
+          var parts = rest.split('/');
+          var filename = parts[parts.length - 1];
+          if (!lib.deep && parts.length > 1) continue;
+          if (filename && filename.charAt(0) !== '.') {
+            svgs.push({ name: filename.replace('.svg', ''), path: name, ver: version });
+          }
+        }
+      }
+      svgs.sort(function(a, b) { return a.name < b.name ? -1 : a.name > b.name ? 1 : 0; });
+      return svgs;
+    }
+
+    function getFilteredLibIcons() {
+      if (!activeLib || !libCache[activeLib.id]) return [];
+      var icons = libCache[activeLib.id].slice();
+      if (libSearchTerm) {
+        var q = libSearchTerm.toLowerCase();
+        icons = icons.filter(function(ic) { return ic.name.toLowerCase().indexOf(q) !== -1; });
+      }
+      if (libSortOrder === 'name-desc') {
+        icons.sort(function(a, b) { return b.name.localeCompare(a.name); });
+      } else {
+        icons.sort(function(a, b) { return a.name.localeCompare(b.name); });
+      }
+      return icons;
+    }
+
+    function renderLibraryIcons() {
+      var filtered = getFilteredLibIcons();
+      var end = (libPage + 1) * LIB_PAGE_SIZE;
+      var slice = filtered.slice(0, end);
+      libraryIconGrid.innerHTML = '';
+      libraryEmpty.style.display = slice.length ? 'none' : 'flex';
+      if (slice.length) libraryEmpty.querySelector('p').textContent = 'No icons found';
+
+      slice.forEach(function(ic, idx) {
+        var card = document.createElement('div');
+        card.className = 'lib-icon-card' + (selectedLibIcons.has(ic.path) ? ' selected' : '');
+        card.draggable = true;
+
+        var preview = document.createElement('div');
+        preview.className = 'lib-icon-preview';
+        preview.innerHTML = '<div class="lib-icon-placeholder"></div>';
+        loadLibIcon(activeLib, ic, preview);
+
+        var name = document.createElement('div');
+        name.className = 'lib-icon-name';
+        name.textContent = ic.name;
+        name.title = ic.name;
+
+        var actions = document.createElement('div');
+        actions.className = 'lib-icon-actions';
+
+        var importBtn = document.createElement('button');
+        importBtn.className = 'import-btn';
+        importBtn.innerHTML = LUCIDE_PLUS;
+        importBtn.title = 'Import to canvas';
+        importBtn.onclick = function(e) {
+          e.stopPropagation();
+          importLibIcon(activeLib, ic);
+        };
+        actions.appendChild(importBtn);
+
+        var favBtn = document.createElement('button');
+        favBtn.className = 'card-fav-btn';
+        favBtn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
+        favBtn.title = 'Add to favorites';
+        favBtn.onclick = function(e) {
+          e.stopPropagation();
+          favLibIcon(activeLib, ic);
+        };
+        actions.appendChild(favBtn);
+
+        card.addEventListener('click', function(e) {
+          if (e.shiftKey || e.ctrlKey || e.metaKey) {
+            if (selectedLibIcons.has(ic.path)) selectedLibIcons.delete(ic.path);
+            else selectedLibIcons.add(ic.path);
+            updateLibBatchBar();
+            renderLibraryIcons();
+          } else {
+            openLibIconDetail(activeLib, ic);
+          }
+        });
+
+        (function(libRef, icRef, previewEl) {
+          var ver = icRef.ver || libVersionCache[libRef.pkg] || 'latest';
+          var cdnUrl = 'https://cdn.jsdelivr.net/npm/' + libRef.pkg + '@' + ver + icRef.path;
+
+          card.addEventListener('dragstart', function(e) {
+            card.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'copyMove';
+            e.dataTransfer.setData('text/plain', icRef.name);
+            var cached = libSvgCache[libRef.pkg + icRef.path];
+            if (cached) e.dataTransfer.setData('text/html', cached);
+            var dragImg = previewEl.querySelector('svg');
+            if (dragImg) e.dataTransfer.setDragImage(dragImg, dragImg.getBoundingClientRect().width / 2, dragImg.getBoundingClientRect().height / 2);
+          });
+          card.addEventListener('dragend', function(e) {
+            card.classList.remove('dragging');
+            if (e.dataTransfer.dropEffect === 'none') {
+              var cached = libSvgCache[libRef.pkg + icRef.path];
+              var svgInfo = { url: cdnUrl, sourceUrl: cdnUrl, title: icRef.name, isInline: !!cached, content: cached || '' };
+              parent.postMessage({ pluginMessage: { type: 'drop-svg', svg: svgInfo } }, '*');
+            }
+          });
+        })(activeLib, ic, preview);
+
+        preview.appendChild(actions);
+        card.appendChild(preview);
+        card.appendChild(name);
+        libraryIconGrid.appendChild(card);
+      });
+
+      libraryLoadMore.style.display = end < filtered.length ? 'block' : 'none';
+    }
+
+    var libSvgCache = {};
+
+    async function loadLibIcon(lib, ic, el) {
+      var key = lib.pkg + ic.path;
+      if (libSvgCache[key]) { el.innerHTML = libSvgCache[key]; return; }
+      try {
+        var ver = ic.ver || libVersionCache[lib.pkg] || 'latest';
+        var url = 'https://cdn.jsdelivr.net/npm/' + lib.pkg + '@' + ver + ic.path;
+        var resp = await fetch(url);
+        if (!resp.ok) return;
+        var svg = await resp.text();
+        libSvgCache[key] = svg;
+        el.innerHTML = svg;
+      } catch (e) {}
+    }
+
+    async function getLibSvgContent(lib, ic) {
+      var key = lib.pkg + ic.path;
+      if (libSvgCache[key]) return libSvgCache[key];
+      var ver = ic.ver || libVersionCache[lib.pkg] || 'latest';
+      var url = 'https://cdn.jsdelivr.net/npm/' + lib.pkg + '@' + ver + ic.path;
+      var resp = await fetch(url);
+      var svg = await resp.text();
+      libSvgCache[key] = svg;
+      return svg;
+    }
+
+    async function importLibIcon(lib, ic) {
+      var content = await getLibSvgContent(lib, ic);
+      if (!content) return;
+      parent.postMessage({ pluginMessage: { type: 'import-svg', svg: { content: content, title: ic.name, isInline: true } } }, '*');
+    }
+
+    async function favLibIcon(lib, ic) {
+      var content = await getLibSvgContent(lib, ic);
+      if (!content) return;
+      parent.postMessage({ pluginMessage: { type: 'toggle-favorite', svg: { content: content, title: ic.name, isInline: true, url: '' } } }, '*');
+    }
+
+    /* ── Library detail panel ─────────────────────── */
+
+    function applyLibIconCustomization(svgStr) {
+      var color = libDetailColor.value;
+      var size = parseInt(libDetailSize.value) || 32;
+      var s = svgStr;
+      if (color && color !== '#000000') {
+        s = s.replace(/<svg([^>]*)>/, function(m, attrs) {
+          attrs = attrs.replace(/\s*(fill|color)="[^"]*"/g, '');
+          return '<svg' + attrs + ' fill="' + color + '" color="' + color + '">';
+        });
+      }
+      s = s.replace(/<svg([^>]*)>/, function(m, attrs) {
+        attrs = attrs.replace(/\s*(width|height)="[^"]*"/g, '');
+        return '<svg' + attrs + ' width="' + size + '" height="' + size + '">';
+      });
+      return s;
+    }
+
+    async function openLibIconDetail(lib, ic) {
+      activeLibIcon = { lib: lib, ic: ic };
+      var content = await getLibSvgContent(lib, ic);
+      if (!content) return;
+      libDetailPreview.innerHTML = content;
+      libDetailName.textContent = ic.name;
+      libDetailLib.textContent = lib.name;
+      libDetailPanel.style.display = 'flex';
+
+      libDetailColor.value = '#000000';
+      libDetailSize.value = '32';
+      document.querySelectorAll('.lib-size-btn').forEach(function(b) {
+        b.classList.toggle('active', b.dataset.size === '32');
+      });
+    }
+
+    libDetailClose.addEventListener('click', function() {
+      libDetailPanel.style.display = 'none';
+      activeLibIcon = null;
+    });
+
+    document.querySelectorAll('.lib-size-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.lib-size-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        libDetailSize.value = btn.dataset.size;
+        });
+      });
+
+    libDetailSize.addEventListener('input', function() {
+      document.querySelectorAll('.lib-size-btn').forEach(function(b) {
+        b.classList.toggle('active', b.dataset.size === libDetailSize.value);
+      });
+    });
+
+    libDetailImportFrame.addEventListener('click', async function() {
+      if (!activeLibIcon) return;
+      var content = await getLibSvgContent(activeLibIcon.lib, activeLibIcon.ic);
+      if (!content) return;
+      content = applyLibIconCustomization(content);
+      parent.postMessage({ pluginMessage: { type: 'import-svg', svg: { content: content, title: activeLibIcon.ic.name, isInline: true }, asComponent: false } }, '*');
+    });
+
+    libDetailImportComponent.addEventListener('click', async function() {
+      if (!activeLibIcon) return;
+      var content = await getLibSvgContent(activeLibIcon.lib, activeLibIcon.ic);
+      if (!content) return;
+      content = applyLibIconCustomization(content);
+      parent.postMessage({ pluginMessage: { type: 'import-svg', svg: { content: content, title: activeLibIcon.ic.name, isInline: true }, asComponent: true } }, '*');
+    });
+
+    libDetailCopySvg.addEventListener('click', async function() {
+      if (!activeLibIcon) return;
+      var content = await getLibSvgContent(activeLibIcon.lib, activeLibIcon.ic);
+      if (!content) return;
+      content = applyLibIconCustomization(content);
+      try {
+        await navigator.clipboard.writeText(content);
+        libDetailCopySvg.textContent = 'Copied!';
+        setTimeout(function() { libDetailCopySvg.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy SVG Code'; }, 1500);
+      } catch (e) {}
+    });
+
+    libDetailDownload.addEventListener('click', async function() {
+      if (!activeLibIcon) return;
+      var content = await getLibSvgContent(activeLibIcon.lib, activeLibIcon.ic);
+      if (!content) return;
+      content = applyLibIconCustomization(content);
+      var blob = new Blob([content], { type: 'image/svg+xml' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = activeLibIcon.ic.name + '.svg';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+
+    libDetailFav.addEventListener('click', function() {
+      if (!activeLibIcon) return;
+      favLibIcon(activeLibIcon.lib, activeLibIcon.ic);
+    });
+
+    /* ── Library sort dropdown ────────────────────── */
+
+    libSortBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var wasOpen = libSortDropdown.classList.contains('open');
+      closeAllDropdowns();
+      if (!wasOpen) libSortDropdown.classList.add('open');
+    });
+
+    libSortDropdown.querySelectorAll('.toolbar-dropdown-item').forEach(function(item) {
+      item.addEventListener('click', function() {
+        libSortDropdown.querySelectorAll('.toolbar-dropdown-item').forEach(function(i) { i.classList.remove('selected'); });
+        item.classList.add('selected');
+        libSortDropdown.classList.remove('open');
+        libSortOrder = item.dataset.libsort;
+        libPage = 0;
+        renderLibraryIcons();
+      });
+    });
+
+    /* ── Library select all / batch ───────────────── */
+
+    libSelectAllBtn.addEventListener('click', function() {
+      var filtered = getFilteredLibIcons();
+      if (selectedLibIcons.size === filtered.length && filtered.length > 0) {
+        selectedLibIcons.clear();
+      } else {
+        filtered.forEach(function(ic) { selectedLibIcons.add(ic.path); });
+      }
+      updateLibBatchBar();
+      renderLibraryIcons();
+    });
+
+    function updateLibBatchBar() {
+      if (selectedLibIcons.size > 0) {
+        libBatchBar.style.display = 'flex';
+        libBatchCount.textContent = selectedLibIcons.size + ' selected';
+      } else {
+        libBatchBar.style.display = 'none';
+      }
+    }
+
+    libBatchDeselect.addEventListener('click', function() {
+      selectedLibIcons.clear();
+      updateLibBatchBar();
+      renderLibraryIcons();
+    });
+
+    libBatchImport.addEventListener('click', async function() {
+      if (!activeLib || selectedLibIcons.size === 0) return;
+      var icons = libCache[activeLib.id].filter(function(ic) { return selectedLibIcons.has(ic.path); });
+      var svgs = [];
+      for (var i = 0; i < icons.length; i++) {
+        var content = await getLibSvgContent(activeLib, icons[i]);
+        if (content) svgs.push({ content: content, title: icons[i].name, isInline: true });
+      }
+      if (svgs.length) {
+        parent.postMessage({ pluginMessage: { type: 'import-all-svgs', svgs: svgs, layout: 'grid', spacing: 20 } }, '*');
+      }
+      selectedLibIcons.clear();
+      updateLibBatchBar();
+      renderLibraryIcons();
+    });
+
+    librarySearch.addEventListener('input', function() {
+      libSearchTerm = librarySearch.value.trim();
+      libPage = 0;
+      renderLibraryIcons();
+    });
+
+    libraryLoadMore.addEventListener('click', function() {
+      libPage++;
+      renderLibraryIcons();
+    });
+
     /* ── Export ZIP ───────────────────────────────── */
 
     function crc32(data) {
@@ -1600,12 +2323,13 @@
           if (svg.isInline && svg.content) e.dataTransfer.setData('text/html', svg.content);
           const dragImg = card.querySelector('.svg-card-preview');
           if (dragImg) e.dataTransfer.setDragImage(dragImg, dragImg.offsetWidth / 2, dragImg.offsetHeight / 2);
-          parent.postMessage({ pluginMessage: { type: 'drag-svg-start', svg } }, '*');
         });
 
-        card.addEventListener('dragend', () => {
+        card.addEventListener('dragend', e => {
           card.classList.remove('dragging');
-          parent.postMessage({ pluginMessage: { type: 'drag-svg-end' } }, '*');
+          if (e.dataTransfer.dropEffect === 'none') {
+            parent.postMessage({ pluginMessage: { type: 'drop-svg', svg } }, '*');
+          }
         });
 
         svgGrid.appendChild(card);
